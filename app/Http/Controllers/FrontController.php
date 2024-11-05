@@ -58,11 +58,6 @@ class FrontController extends Controller {
                     continue;
                 }
 
-                if ($field == 'GUM' && $position == 'CTR') {
-                    $center = 1;
-                    continue;
-                }
-
                 if ($position == 'APP' || $position == 'DEP') {
                     $fields[$field]['approach'] = [
                         'online' => 1
