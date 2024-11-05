@@ -162,25 +162,25 @@ class Ots extends Model {
         } elseif ($pos == 54) {
             $position = 'Local OTS';
         } elseif ($pos == 100) {
-            $position = 'ZTL On-Boarding';
+            $position = 'HCF On-Boarding';
         } elseif ($pos == 101) {
-            $position = 'Class D/C Clearance Delivery';
+            $position = 'Unrestricted Clearance Delivery';
         } elseif ($pos == 102) {
             $position = 'Class B Clearance Delivery';
         } elseif ($pos == 103) {
             $position = 'ATL Clearance Delivery Theory';
         } elseif ($pos == 104) {
-            $position = 'ATL Clearance';
+            $position = 'T2 HNL Clearance';
         } elseif ($pos == 105) {
-            $position = 'Class D/C Ground';
+            $position = 'Unrestricted Ground';
         } elseif ($pos == 106) {
             $position = 'Class B Ground';
         } elseif ($pos == 107) {
             $position = 'ATL Ground Theory';
         } elseif ($pos == 108) {
-            $position = 'ATL Ground';
+            $position = 'T2 HNL Ground';
         } elseif ($pos == 109) {
-            $position = 'Class D Tower';
+            $position = 'Unrestricted Tower';
         } elseif ($pos == 110) {
             $position = 'Class C Tower';
         } elseif ($pos == 111) {
@@ -188,11 +188,11 @@ class Ots extends Model {
         } elseif ($pos == 112) {
             $position = 'ATL Tower Theory';
         } elseif ($pos == 113) {
-            $position = 'ATL Tower';
+            $position = 'T2 HNL Tower';
         } elseif ($pos == 114) {
             $position = 'Minor Approach Introduction';
         } elseif ($pos == 115) {
-            $position = 'Minor Approach';
+            $position = 'Unrestricted Approach';
         } elseif ($pos == 116) {
             $position = 'CLT Approach';
         } elseif ($pos == 117) {
@@ -200,11 +200,11 @@ class Ots extends Model {
         } elseif ($pos == 118) {
             $position = 'A80 Terminal Arrival Radar';
         } elseif ($pos == 119) {
-            $position = 'A80 Arrival Radar';
+            $position = 'HCF Approach Radar';
         } elseif ($pos == 120) {
             $position = 'Atlanta Center Introduction';
         } elseif ($pos == 121) {
-            $position = 'Atlanta Center';
+            $position = 'HCF Center';
         }
 
         return $position;

@@ -58,10 +58,10 @@ New Training Ticket
             <div class="col-sm-3">
                 <div class="form-group">
 					@php 
-						$currentDateET = new DateTime("now", new DateTimeZone('America/New_York') ); 
-						$currentTimeET = $currentDateET->format('H:i');
+						$currentDateUTC = new DateTime("now", new DateTimeZone('Zulu') ); 
+						$currentTimeUTC = $currentDateET->format('H:i');
 					@endphp
-                    <label for="start" class="form-label">Start Time ET (now {{ $currentTimeET }})</label>
+                    <label for="start" class="form-label">Start Time Zulu (now {{ $currentTimeUTC }})</label>
                     <div class="input-group date dt_picker_time" id="datetimepicker2" data-target-input="nearest">
                         {{ html()->text('start', null)->placeholder('00:00')->class(['form-control', 'datetimepicker-input'])->attributes(['data-target' => '#datetimepicker2']) }}
                     </div>
@@ -69,7 +69,7 @@ New Training Ticket
             </div>
             <div class="col-sm-3">
                 <div class="form-group">
-                    <label for="end" class="form-label">End Time ET</label>
+                    <label for="end" class="form-label">End Time Zulu</label>
                     <div class="input-group date dt_picker_time" id="datetimepicker3" data-target-input="nearest">
                         {{ html()->text('end', null)->placeholder('00:00')->class(['form-control', 'datetimepicker-input'])->attributes(['data-target' => '#datetimepicker3']) }}
                     </div>

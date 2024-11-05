@@ -47,7 +47,7 @@ class UpdateSoloCerts extends Command {
 
         foreach ($solo_certs->data as $s) {
             if (! ($s === true || $s === false)) {
-                if ($s->position == 'ATL_CTR') {
+                if ($s->position == 'HNL_CTR') {
                     $current_cert = SoloCert::where('cid', $s->cid)->where('status', 0)->first();
                     if (!$current_cert) {
                         $cert = new SoloCert;
@@ -90,7 +90,7 @@ class UpdateSoloCerts extends Command {
 
         foreach ($certs as $cert) {
             if ($cert->expiration <= $today && $cert->status == 0) {
-                Mail::to('ta@ztlartcc.org')->send(new SoloCertExpiration($cert));
+                Mail::to('hcf-ta@vatusa.net')->send(new SoloCertExpiration($cert));
                 $cert->status = 1;
 
                 $user = User::find($cert->cid);

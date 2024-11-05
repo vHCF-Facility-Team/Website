@@ -26,10 +26,10 @@
     </li>
 </ul>
 
-<p>If you would like to submit comments to be included in your training ticket, you can do that by going to <a href="https://www.ztlartcc.org/dashboard/controllers/ticket/{{ $ticket->id }}">https://www.ztlartcc.org/dashboard/controllers/ticket/{{ $ticket->id }}</a> or by viewing the ticket from your profile page on the controller dashboard. Please note that these comments are viewable by all the training staff and once they are submitted, they cannot be changed.</p>
+<p>If you would like to submit comments to be included in your training ticket, you can do that by going to <a href="https://www.vhcf.net/dashboard/controllers/ticket/{{ $ticket->id }}">https://www.vhcf.net/dashboard/controllers/ticket/{{ $ticket->id }}</a> or by viewing the ticket from your profile page on the controller dashboard. Please note that these comments are viewable by all the training staff and once they are submitted, they cannot be changed.</p>
 
-<p>If you believe there are any errors, please contact the training administrator at <a href="mailto:ta@ztlartcc.org">ta@ztlartcc.org</a>.</p>
+<p>If you believe there are any errors, please contact the training administrator at <a href="mailto:hcf-ta@vatusa.net">hcf-ta@vatusa.net</a>.</p>
 
 <p>Best regards,</p>
-<p>ZTL Training Staff</p>
+<p>HCF Training Staff</p>
 @endsection

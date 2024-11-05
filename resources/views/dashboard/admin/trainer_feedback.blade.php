@@ -333,11 +333,11 @@ $tabs[] = (object) $t;
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label for="name">Your Name</label>
-                                            {{ html()->text('name', 'vZTL Training Staff')->class(['form-control']) }}
+                                            {{ html()->text('name', 'vHCF Training Staff')->class(['form-control']) }}
                                         </div>
                                         <div class="col-sm-6">
                                             <label for="email">Your Email</label>
-                                            {{ html()->email('email', 'ta@ztlartcc.org')->class(['form-control']) }}
+                                            {{ html()->email('email', 'ta@vhcf.net')->class(['form-control']) }}
                                         </div>
                                     </div>
                                     <br>

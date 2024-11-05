@@ -25,7 +25,7 @@ class PilotFeedback extends Mailable implements ShouldQueue {
      */
     public function envelope(): Envelope {
         return new Envelope(
-            from: new ZTLAddress('feedback', 'vZTL ARTCC Feedback Department'),
+            from: new ZTLAddress('feedback', 'vHCF ARTCC Feedback Department'),
             replyTo: [
                 new Address($this->replyToAddress, $this->replyToName)
             ],

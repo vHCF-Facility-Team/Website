@@ -25,7 +25,7 @@ class OtsAssignment extends Mailable implements ShouldQueue {
      */
     public function envelope(): Envelope {
         return new Envelope(
-            from: new ZTLAddress('ots-center', 'vZTL ARTCC OTS Center'),
+            from: new ZTLAddress('ots-center', 'vHCF ARTCC OTS Center'),
             replyTo: [
                 new Address($this->controller->email, $this->controller->full_name)
             ],

@@ -31,9 +31,8 @@
                             <a class="dropdown-item" href="/pilots/airports">Airports</a>
                             <a class="dropdown-item" href="/pilots/request-staffing">Request Staffing</a>
                             <a class="dropdown-item" href="http://www.flightaware.com/statistics/ifr-route/" target="_blank">IFR Routes</a>
-                            <a class="dropdown-item" href="/pilots/guide/atl">ATL Pilot Guide</a>
-                            <a class="dropdown-item" href="/ramp-status/atl">ATL Gate Status</a>
-                            <a class="dropdown-item" href="/ramp-status/clt">CLT Gate Status</a>
+                            <a class="dropdown-item" href="/pilots/guide/hnl">HNL Pilot Guide</a>
+                            <a class="dropdown-item" href="/ramp-status/hnl">HNL Gate Status</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -42,13 +41,11 @@
                             <a class="dropdown-item" href="/controllers/roster">Roster</a>
                             <a class="dropdown-item" href="/controllers/staff">Staff</a>
                             <a class="dropdown-item" href="/controllers/files">Files</a>
-                            <a class="dropdown-item" href="https://ids.ztlartcc.org">vIDS</a>
                             <a class="dropdown-item" href="/controllers/stats">Controller Stats</a>
-                            <a class="dropdown-item" href="/controllers/teamspeak">TeamSpeak Information</a>
                         </div>
                     </li>
                     @if(Auth::guest())
-                        <a class="nav-link" href="{{ URL::to('/'); }}/visit">Visit ZTL</a>
+                        <a class="nav-link" href="{{ URL::to('/'); }}/visit">Visit HCF</a>
                         <a class="nav-link" href="/feedback/new">Feedback</a>
                     @endif
                     @if(Auth::check())

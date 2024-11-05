@@ -168,27 +168,24 @@ Update Controller
         </div>
         <div role="tabpanel" class="tab-pane" id="certifications">
             <br>
-            <h6><span class="badge badge-warning text-light">New!</span>&nbsp;This control now complies with GCAP requirements.<br>Please review the latest version of ZTL 3120.4 prior to updating a controller's certifications.</h6>
+            <h6><span class="badge badge-warning text-light">New!</span>&nbsp;This control now complies with GCAP requirements.<br>Please review the latest version of HCF 3120.4 prior to updating a controller's certifications.</h6>
             <div class="form-group">
                 <div class="row">
                     <div class="col-sm-6">
                         @php
                             $solo_disable = $unres_gnd_disable = $unres_twr_disable = $unres_app_disable = $center_disable = 'disabled';
-                            $clt_del_gnd_disable = $clt_twr_disable = $clt_app_disable = $atl_disable = $atl_app_disable = 'disabled';
+                            $hnl_disable = $hnl_app_disable = 'disabled';
                             if(Auth::user()->isAbleTo('roster')) {
                                 $solo_disable = $unres_gnd_disable = $unres_twr_disable = $unres_app_disable = $center_disable = null;
-                                $clt_del_gnd_disable = $clt_twr_disable = $clt_app_disable = $atl_disable = $atl_app_disable = null;
+                                $hnl_disable = $hnl_app_disable = null;
                             }
                             elseif (Auth::user()->isAbleTo('train') && is_numeric(Auth::user()->max)) {
                                 $unres_gnd_disable = (Auth::user()->max >= Auth::user()->getMagicNumber('TRAIN_UNRES_GND')) ? null : 'disabled';
                                 $solo_disable = (Auth::user()->max > Auth::user()->getMagicNumber('TRAIN_UNRES_GND')) ? null : 'disabled';
-                                $clt_del_gnd_disable = (Auth::user()->max >= Auth::user()->getMagicNumber('TRAIN_CLT_DEL_GND')) ? null : 'disabled';
                                 $unres_twr_disable = (Auth::user()->max >= Auth::user()->getMagicNumber('TRAIN_UNRES_TWR')) ? null : 'disabled';
-                                $clt_twr_disable = (Auth::user()->max >= Auth::user()->getMagicNumber('TRAIN_CLT_TWR')) ? null : 'disabled';
-                                $atl_disable = (Auth::user()->max >= Auth::user()->getMagicNumber('TRAIN_ATL_TWR')) ? null : 'disabled';
+								$hnl_disable = (Auth::user()->max >= Auth::user()->getMagicNumber('TRAIN_HNL_TWR')) ? null : 'disabled';
                                 $unres_app_disable = (Auth::user()->max >= Auth::user()->getMagicNumber('TRAIN_UNRES_APP')) ? null : 'disabled';
-                                $clt_app_disable = (Auth::user()->max >= Auth::user()->getMagicNumber('TRAIN_CLT_APP')) ? null : 'disabled';
-                                $atl_app_disable = (Auth::user()->max >= Auth::user()->getMagicNumber('TRAIN_ATL_APP')) ? null : 'disabled';
+                                $hnl_app_disable = (Auth::user()->max >= Auth::user()->getMagicNumber('TRAIN_HNL_APP')) ? null : 'disabled';
                                 $center_disable = (Auth::user()->max >= Auth::user()->getMagicNumber('TRAIN_CTR')) ? null : 'disabled';
                             }
                         @endphp
@@ -227,52 +224,29 @@ Update Controller
                 </div>
             </div>
             <hr>
-            <h6><i class="fas fa-level-up-alt"></i>&nbsp;Tier 1 Facility Certifications</h6>
+            <h6><i class="fas fa-level-up-alt"></i>&nbsp;Tier 2 Facility Certifications</h6>
+            
             <div class="form-group">
                 <div class="row">
                     <div class="col-sm-6">
-                        <label for="clt_del">Charlotte Clearance Delivery</label>
-                        {{ html()->select('clt_del', $user->uncertified_certified, $user->clt_del)->class(['form-control'])->attributes([$clt_del_gnd_disable]) }}
+                        <label for="hnl_del">Honolulu Clearance Delivery</label>
+                        {{ html()->select('hnl_del', $user->uncertified_certified, $user->hnl_del)->class(['form-control'])->attributes([$hnl_disable]) }}
                     </div>
                     <div class="col-sm-6">
-                        <label for="clt_gnd">Charlotte Ground</label>
-                        {{ html()->select('clt_gnd', $user->uncertified_certified, $user->clt_gnd)->class(['form-control'])->attributes([$clt_del_gnd_disable]) }}
+                        <label for="atl_gnd">Honolulu Ground</label>
+                        {{ html()->select('hnl_gnd', $user->uncertified_certified, $user->hnl_gnd)->class(['form-control'])->attributes([$hnl_disable]) }}
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="row">
                     <div class="col-sm-6">
-                        <label for="clt_twr">Charlotte Tower</label>
-                        {{ html()->select('clt_twr', $user->uncertified_certified, $user->clt_twr)->class(['form-control'])->attributes([$clt_twr_disable]) }}
+                        <label for="hnl_twr">Honolulu Tower</label>
+                        {{ html()->select('hnl_twr', $user->uncertified_certified, $user->hnl_twr)->class(['form-control'])->attributes([$hnl_disable]) }}
                     </div>
                     <div class="col-sm-6">
-                        <label for="clt_app">Charlotte Approach</label>
-                        {{ html()->select('clt_app', $user->uncertified_certified, $user->clt_app)->class(['form-control'])->attributes([$clt_app_disable]) }}
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label for="atl_del">Atlanta Clearance Delivery</label>
-                        {{ html()->select('atl_del', $user->uncertified_certified, $user->atl_del)->class(['form-control'])->attributes([$atl_disable]) }}
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="atl_gnd">Atlanta Ground</label>
-                        {{ html()->select('atl_gnd', $user->uncertified_certified, $user->atl_gnd)->class(['form-control'])->attributes([$atl_disable]) }}
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label for="atl_twr">Atlanta Tower</label>
-                        {{ html()->select('atl_twr', $user->uncertified_certified, $user->atl_twr)->class(['form-control'])->attributes([$atl_disable]) }}
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="atl_app">Atlanta (A80) Approach</label>
-                        {{ html()->select('atl_app', $user->uncertified_certified_a80, $user->atl_app)->class(['form-control'])->attributes([$atl_app_disable]) }}
+                        <label for="hnl_app">Honolulu Approach</label>
+                        {{ html()->select('hnl_app', $user->uncertified_certified_hcf, $user->hnl_app)->class(['form-control'])->attributes([$hnl_app_disable]) }}
                     </div>
                 </div>
             </div>

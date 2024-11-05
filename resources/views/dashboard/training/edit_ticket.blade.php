@@ -59,12 +59,12 @@ Edit Training Ticket
                 <div class="form-group">
                     @if($ticket->draft)
                         @php 
-						    $currentDateET = new DateTime("now", new DateTimeZone('America/New_York') ); 
-						    $currentTimeET = $currentDateET->format('H:i');
+						    $currentDateUTC = new DateTime("now", new DateTimeZone('Zulu') ); 
+						    $currentTimeUTC = $currentDateET->format('H:i');
 					    @endphp
-                        <label for="start" class="form-label">Start Time ET (now {{ $currentTimeET }})</label>
+                        <label for="start" class="form-label">Start Time Zulu (now {{ $currentTimeUTC }})</label>
                     @else
-                        <label for="start" class="form-label">Start Time ET</label>
+                        <label for="start" class="form-label">Start Time Zulu</label>
                     @endif
                     <div class="input-group date dt_picker_time" id="datetimepicker2" data-target-input="nearest">
                         {{ html()->text('start', $ticket->start_time)->placeholder('00:00')->class(['form-control', 'datetimepicker-input'])->attributes(['data-target' => '#datetimepicker2']) }}
@@ -73,7 +73,7 @@ Edit Training Ticket
             </div>
             <div class="col-sm-3">
                 <div class="form-group">
-                    <label for="end" class="form-label">End Time ET</label>
+                    <label for="end" class="form-label">End Time Zulu</label>
                     <div class="input-group date dt_picker_time" id="datetimepicker3" data-target-input="nearest">
                         {{ html()->text('end', $ticket->end_time)->placeholder('00:00')->class(['form-control', 'datetimepicker-input'])->attributes(['data-target' => '#datetimepicker3']) }}
                     </div>
@@ -153,6 +153,9 @@ Edit Training Ticket
             <p id="autosaveIndicator" class="font-italic">Last autosaved at: Not yet saved</p>
             <button class="btn btn-primary" type="submit" name="action" value="draft">Save as Draft</button>
             <button class="btn btn-success" type="submit" name="action" value="new">Finalize Ticket</button>
+            @if(Auth::id() == $ticket->trainer_id || Auth::user()->isAbleTo('snrStaff'))
+                <a class="btn btn-danger" href="/dashboard/training/tickets/delete/{{ $ticket->id }}">Delete Ticket</a>
+            @endif
         @else
             <button class="btn btn-success" type="submit" name="action" value="save">Update Ticket</button>
         @endif

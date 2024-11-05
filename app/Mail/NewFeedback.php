@@ -24,7 +24,7 @@ class NewFeedback extends Mailable implements ShouldQueue {
      */
     public function envelope(): Envelope {
         return new Envelope(
-            from: new ZTLAddress('feedback', 'vZTL ARTCC Feedback Department'),
+            from: new ZTLAddress('feedback', 'vHCF ARTCC Feedback Department'),
             subject: 'You Have New Feedback!',
         );
     }

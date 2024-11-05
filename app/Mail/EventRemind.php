@@ -24,7 +24,7 @@ class EventRemind extends Mailable implements ShouldQueue {
      */
     public function envelope(): Envelope {
         return new Envelope(
-            from: new ZTLAddress('events', 'vZTL ARTCC Events Department'),
+            from: new ZTLAddress('events', 'vHCF ARTCC Events Department'),
             subject: 'Upcoming Event Reminder'
         );
     }

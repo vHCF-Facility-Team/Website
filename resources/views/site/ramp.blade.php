@@ -11,10 +11,8 @@
 @endpush
 
 @section('content')
-@if( $afld == 'ATL')
-  @include('inc.header', ['title' => '<center>Atlanta Hartsfield Jackson Int\'l Airport (ATL) Ramp/Gate Status</center>', 'type' => 'external'])
-@elseif( $afld == 'CLT')
-  @include('inc.header', ['title' => '<center>Charlotte Douglas Int\'l Airport (CLT) Ramp/Gate Status</center>', 'type' => 'external'])
+@if( $afld == 'HNL')
+  @include('inc.header', ['title' => '<center>Daniel K. Inouye International Airport (HNL) Ramp/Gate Status</center>', 'type' => 'external'])
 @endif
 
 <div class="container">
@@ -28,15 +26,10 @@
   </div>
 </div>
 <script>
-  @if($afld == 'ATL')
-  const centroid = [33.64079, -84.43295];
-  const maxLatLon = [33.66, -84.39];
-  const minLatLon = [33.61, -84.46];
-  @endif
-  @if($afld == 'CLT')
-  const centroid = [35.22006, -80.94410];
-  const maxLatLon = [35.22770, -80.9287];
-  const minLatLon = [35.19999, -80.9676];
+  @if($afld == 'HNL')
+  const centroid = [21.31851, -157.92862];
+  const maxLatLon = [21.3460, -157.9604];
+  const minLatLon = [21.2958, -157.9034];
   @endif
 </script>
 <script src="{{mix('js/pilots_guide.js')}}"></script>

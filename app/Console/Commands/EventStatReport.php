@@ -63,7 +63,7 @@ class EventStatReport extends Command {
             })
             ->mapWithKeys(function ($airport) use ($client, $event_start_time, $event_end_time) {
                 $data = [];
-                $res = $client->request('GET', 'https://statsim.net/flights/airport/?icao=K' . $airport . '&period=custom&json=true&from=' . $event_start_time . '&to=' . $event_end_time);
+                $res = $client->request('GET', 'https://statsim.net/flights/airport/?icao=P' . $airport . '&period=custom&json=true&from=' . $event_start_time . '&to=' . $event_end_time);
                 $result = json_decode($res->getBody());
 
                 $data["departures"] = count($result->departed);

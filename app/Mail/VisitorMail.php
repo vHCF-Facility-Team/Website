@@ -18,7 +18,7 @@ class VisitorMail extends Mailable implements ShouldQueue {
         'new' => 'New Visitor Request Submitted',
         'accept' => 'Visitor Request Accepted',
         'reject' => 'Visitor Request Rejected',
-        'remove' => 'Notification of ZTL Roster Removal'
+        'remove' => 'Notification of HCF Roster Removal'
     ];
 
     /**
@@ -32,9 +32,9 @@ class VisitorMail extends Mailable implements ShouldQueue {
      */
     public function envelope(): Envelope {
         return new Envelope(
-            from: new ZTLAddress('visitors', 'vZTL ARTCC Visiting Department'),
+            from: new ZTLAddress('visitors', 'vHCF ARTCC Visiting Department'),
             replyTo: [
-                new Address('datm@ztlartcc.org', 'vZTL ARTCC DATM')
+                new Address('hcf-datm@vatusa.net', 'vHCF ARTCC DATM')
             ],
             subject: $this::$SUBJECTS[$this->type]
         );

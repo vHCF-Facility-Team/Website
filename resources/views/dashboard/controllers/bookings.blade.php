@@ -49,7 +49,7 @@ ATC Bookings
         <div class="card">
             <div class="card-header pb-0">
                 <h5>New Booking</h5>
-                <small class="d-block mb-3"><i>Bookings are limited by ZTL policy to TWR positions and above</i></small>
+                <small class="d-block mb-3"><i>Bookings are limited by HCF policy to TWR positions and above</i></small>
             </div>
             <div class="card-body">
                 {{ html()->form()->route('createBooking')->open() }}
@@ -58,7 +58,7 @@ ATC Bookings
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="facility">3-Letter Facility Identifier</label>
-                                {{ html()->text('facility', null)->placeholder('i.e. ATL, CLT, ZTL')->class(['form-control']) }}
+                                {{ html()->text('facility', null)->placeholder('i.e. HNL, OGG, HCF')->class(['form-control']) }}
                             </div>
                             <div class="col-md-6">
                                 <label for="position">Position</label>

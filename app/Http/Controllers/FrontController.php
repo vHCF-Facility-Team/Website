@@ -53,7 +53,12 @@ class FrontController extends Controller {
                     continue;
                 }
 
-                if ($field == 'ATL' && $position == 'CTR') {
+                if ($field == 'HNL' && $position == 'CTR') {
+                    $center = 1;
+                    continue;
+                }
+
+                if ($field == 'GUM' && $position == 'CTR') {
                     $center = 1;
                     continue;
                 }
@@ -327,11 +332,11 @@ class FrontController extends Controller {
         if (User::find($request->cid) !== null) {
             $user = User::find($request->cid);
             if ($user->status == 1) {
-                return redirect()->back()->with('error', 'Unable to apply as a visitor - you are already listed as a controller on our roster. If you believe this is in error, contact the ZTL DATM at datm@ztlartcc.org');
+                return redirect()->back()->with('error', 'Unable to apply as a visitor - you are already listed as a controller on our roster. If you believe this is in error, contact the HCF DATM at hcf-datm@vatusa.net');
             }
         }
         
-        if ($request->rating != 1) {
+        if ($request->rating != 4) {
             $expireDate = new DateTime($request->updated_at);
             $expireDate->modify('+ 90 days');
             if (date_create() > $expireDate) {
@@ -359,11 +364,11 @@ class FrontController extends Controller {
                 );
             }
                     
-            Mail::to($visit->email)->cc('datm@ztlartcc.org')->send(new VisitorMail('new', $visit));
+            Mail::to($visit->email)->cc('hcf-datm@vatusa.net')->send(new VisitorMail('new', $visit));
         
-            return redirect('/')->with('success', 'Thank you for your interest in the ZTL ARTCC! Your visit request has been submitted.');
+            return redirect('/')->with('success', 'Thank you for your interest in the HCF ARTCC! Your visit request has been submitted.');
         } else {
-            return redirect('/')->with('error', 'You need to be a S1 rated controller or greater');
+            return redirect('/')->with('error', 'You need to be a S3 rated controller or greater');
         }
     }
 
@@ -490,20 +495,16 @@ class FrontController extends Controller {
         $time = $request->time;
         $exp = $request->additional_information;
 
-        Mail::to('ec@ztlartcc.org')->send(new ReqStaffing($name, $email, $org, $date, $time, $exp));
+        Mail::to('hcf-ec@vatusa.net')->send(new ReqStaffing($name, $email, $org, $date, $time, $exp));
 
         return redirect('/')->with('success', 'The staffing request has been delivered to the appropiate parties successfully. You should expect to hear back soon.');
     }
     
-    public function showAtlRamp() {
-        return view('site.ramp')->with('afld', 'ATL');
-    }
-    
-    public function showCltRamp() {
-        return view('site.ramp')->with('afld', 'CLT');
+    public function showHnlRamp() {
+        return view('site.ramp')->with('afld', 'HNL');
     }
 
-    public function pilotGuideAtl() {
+    public function pilotGuideHnl() {
         $atc = ATC::get();
         if ($atc) {
             $lcl_controllers = [];
@@ -512,7 +513,7 @@ class FrontController extends Controller {
             foreach ($atc as $a) {
                 $field = substr($a->position, 0, 3);
                 $position = substr($a->position, -3);
-                if ((($field == 'ATL')||($field == 'ZTL'))&&($a->freq != '199.998')) {
+                if ((($field == 'HNL')&&($a->freq != '199.998')) {
                     if ($position == 'TWR' || $position == 'GND' || $position == 'DEL') {
                         $lcl_controllers[] = $a;
                     } elseif ($position == 'APP' || $position == 'DEP') {
@@ -531,7 +532,7 @@ class FrontController extends Controller {
         }
 
         $client = new Client(['http_errors' => false]);
-        $icao_id = 'KATL';
+        $icao_id = 'PHNL';
         $res = $client->request('GET', 'https://api.aviationapi.com/v1/charts?apt=' . $icao_id);
         $status = $res->getStatusCode();
         $diag = $aaup = '#';
@@ -554,7 +555,7 @@ class FrontController extends Controller {
             $charts = null;
         }
         
-        return view('site.pilot_guide_atl')->with('controllers', $lcl_controllers)
+        return view('site.pilot_guide_hnl')->with('controllers', $lcl_controllers)
         ->with('diag', $diag)->with('aaup', $aaup);
     }
 

@@ -14,7 +14,7 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="from">From</label>
-                    {{ html()->text('from', 'info@notams.ztlartcc.org')->class(['form-control'])->attributes(['disabled']) }}
+                    {{ html()->text('from', 'info@vhcf.net')->class(['form-control'])->attributes(['disabled']) }}
                 </div>
             </div>
             <div class="col-sm-4">
@@ -25,7 +25,7 @@
             </div>
             <div class="col-sm-4">
                 <label for="reply_to">Reply to Email</label>
-                {{ html()->text('reply_to', null)->placeholder('ex. youremail@ztlartcc.org (Required)')->class(['form-control']) }}
+                {{ html()->text('reply_to', null)->placeholder('ex. youremail@vhcf.net (Required)')->class(['form-control']) }}
             </div>
         </div>
         <div class="row">

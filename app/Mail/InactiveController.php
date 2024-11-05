@@ -24,7 +24,7 @@ class InactiveController extends Mailable implements ShouldQueue {
      */
     public function envelope(): Envelope {
         return new Envelope(
-            from: new ZTLAddress('activity', 'vZTL ARTCC Activity Department'),
+            from: new ZTLAddress('activity', 'vHCF ARTCC Activity Department'),
             subject: 'You have not met the activity requirement in the last 30 days',
         );
     }

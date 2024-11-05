@@ -16,7 +16,7 @@ Realops
 @endif
 
 <div class="container">
-<p>Welcome to the main page for ZTL's Realops event! Realops events simulate actual traffic flow by encouraging pilots to fly real-world routes flown by actual airlines on a real time schedule. Use the controls below to bid on a flight and manage your event participation. Thanks for flying with ZTL!</p>
+<p>Welcome to the main page for HCF's Realops event! Realops events simulate actual traffic flow by encouraging pilots to fly real-world routes flown by actual airlines on a real time schedule. Use the controls below to bid on a flight and manage your event participation. Thanks for flying with HCF!</p>
 
 <div class="row">
     <div class="col-12 mx-2">
@@ -27,7 +27,7 @@ Realops
         {{ html()->form('GET')->route('realopsIndex')->id('realops_filter')->open() }}
         <div class="row">
             <div class="col-sm-12 col-md p-1">
-               {{ html()->text('airport_filter', $airport_filter)->class(['form-control'])->placeholder('Airport (DEN)')->id('airport_filter') }}
+               {{ html()->text('airport_filter', $airport_filter)->class(['form-control'])->placeholder('Airport (HNL)')->id('airport_filter') }}
             </div>
             <div class="col-sm-12 col-md p-1">
                {{ html()->text('flightno_filter', $flightno_filter)->class(['form-control'])->placeholder('Flight (DAL367)')->id('flightno_filter') }}

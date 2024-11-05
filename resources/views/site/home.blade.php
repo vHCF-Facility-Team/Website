@@ -92,7 +92,7 @@ Home
 										<span class="badge bg-danger">OFFLINE</span>
 										@endif
 									</td>
-									<td class="py-0 px-2 m-0 text-white">Atlanta Center</td>
+									<td class="py-0 px-2 m-0 text-white">HCF Center</td>
 								</tr>
 
 								@foreach ($fields as $field)
@@ -130,7 +130,7 @@ Home
 					</div>
 					<div class="row">
 						<div class="col-auto">
-							<span class="badge bg-info ml-1">{{ $overflightCount }}</span>&nbsp;&nbsp;flights in ZTL airspace
+							<span class="badge bg-info ml-1">{{ $overflightCount }}</span>&nbsp;&nbsp;flights in HCF airspace
 						</div>
 					</div>
 				</div>
@@ -200,18 +200,6 @@ Home
 	</div> <!-- Carousel row -->
 </div>
 <!-- Modal -->
-<div class="modal fade" id="displayAsx" tabindex="-1" role="dialog" aria-labelledby="displayAsx" aria-hidden="true">
-	<div class="modal-dialog" style="height:90vh; max-width:90vw" role="document">
-		<div class="modal-content py-1 home-modal-bg">
-			<div class="modal-body">
-				<button type="button" class="close" style="position:absolute; z-index:100; top:5px; right:15px;" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<embed src="https://ids.ztlartcc.org/asx#dispNode" frameborder="0" style="height:85vh; width:85vw">
-			</div>
-		</div>
-	</div>
-</div>
 <div class="modal fade" id="displayNewsCalendar" tabindex="-1" role="dialog" aria-labelledby="displayNews" aria-hidden="true">
 	<div class="modal-dialog" style="height:50vh; max-width:50vw" role="document">
 		<div class="modal-content py-1 home-modal-bg">

@@ -24,7 +24,7 @@ class SoloCertExpiration extends Mailable implements ShouldQueue {
      */
     public function envelope(): Envelope {
         return new Envelope(
-            from: new ZTLAddress('solocerts', 'ZTL Solo Certifications'),
+            from: new ZTLAddress('solocerts', 'HCF Solo Certifications'),
             subject: 'Solo Certification Expired',
         );
     }

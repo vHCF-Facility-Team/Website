@@ -107,8 +107,8 @@ class FlightawareImport extends Command {
             //}
 
             // Generate the URL for the HTTP client.
-            // Format: %BASE/schedules/FROM/TO/?origin=KATL
-            $url = Config::get('flightaware.base') . '/schedules/' . $chunk[0]->format('Y-m-d\TH:i:s') . '/' . $chunk[1]->format('Y-m-d\TH:i:s') . '?origin=KATL&include_codeshares=false';
+            // Format: %BASE/schedules/FROM/TO/?origin=PHNL
+            $url = Config::get('flightaware.base') . '/schedules/' . $chunk[0]->format('Y-m-d\TH:i:s') . '/' . $chunk[1]->format('Y-m-d\TH:i:s') . '?origin=PHNL&include_codeshares=false';
             $pbar->setMessage($url);
 
             if (!Config::get('flightaware.dryrun')) {
@@ -135,8 +135,8 @@ class FlightawareImport extends Command {
             }
 
             // Generate the URL for the HTTP client.
-            // Format: %BASE/schedules/FROM/TO/?destination=KATL
-            $url = Config::get('flightaware.base') . '/schedules/' . $chunk[0]->format('Y-m-d\TH:i:s') . '/' . $chunk[1]->format('Y-m-d\TH:i:s') . '?destination=KATL&include_codeshares=false';
+            // Format: %BASE/schedules/FROM/TO/?destination=PHNL
+            $url = Config::get('flightaware.base') . '/schedules/' . $chunk[0]->format('Y-m-d\TH:i:s') . '/' . $chunk[1]->format('Y-m-d\TH:i:s') . '?destination=PHNL&include_codeshares=false';
             $pbar->setMessage($url);
 
             if (!Config::get('flightaware.dryrun')) {

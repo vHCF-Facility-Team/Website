@@ -5,7 +5,7 @@ Visit
 @endsection
 
 @section('content')
-@include('inc.header', ['title' => 'Visit ZTL ARTCC', 'type' => 'external'])
+@include('inc.header', ['title' => 'Visit HCF ARTCC', 'type' => 'external'])
 
 <div class="d-flex justify-content-center mb-5">
     <div class="position-unset col-xl-6 col-10">
@@ -71,7 +71,7 @@ Visit
             </div>
         </div>
         <div class="form-group">
-            <label for="reason">Explanation of Why You Want to Visit the ZTL ARTCC</label>
+            <label for="reason">Explanation of Why You Want to Visit the HCF ARTCC</label>
             {{ html()->textarea('reason', null)->placeholder('Required')->class(['form-control']) }}
         </div>
         <div class="g-recaptcha" data-sitekey="{{ config('google.site_key') }}"></div>

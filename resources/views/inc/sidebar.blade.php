@@ -2,18 +2,14 @@
     <div class="nav flex-column nav-pills sidebar-container" role="tablist" aria-orientation="vertical">
         <div class="dropdown-divider"></div>
         <p class="collapsible-sidebar" name="controllers">
-            ZTL CONTROLLERS
+            HCF CONTROLLERS
             <b class="caret float-right fas fa-caret-left"></b>
         </p>
         <div class="content">
-            @if(Auth::user()->rating_id == 1)
-                <a class="nav-link {{ Nav::urlDoesContain('controllers/teamspeak') }}" href="/controllers/teamspeak">Teamspeak Information</a>
-            @endif
             <a class="nav-link {{ Nav::urlDoesContain('dashboard/controllers/roster') }} {{ Nav::urlDoesContain('/dashboard/admin/roster') }}" href="/dashboard/controllers/roster">Roster</a>
             <a class="nav-link {{ Nav::urlDoesContain('dashboard/controllers/events') }} {{ Nav::urlDoesContain('dashboard/admin/events') }}" href="/dashboard/controllers/events">Events</a>
             <a class="nav-link {{ Nav::urlDoesContain('dashboard/controllers/bookings') }}" href="/dashboard/controllers/bookings">ATC Bookings</a>
             <a class="nav-link {{ Nav::urlDoesContain('dashboard/controllers/files') }} {{ Nav::urlDoesContain('dashboard/admin/files') }}" href="/dashboard/controllers/files">Files</a>
-            <a class="nav-link" href="https://ids.ztlartcc.org">vIDS</a>
             <a class="nav-link {{ Nav::urlDoesContain('dashboard/controllers/scenery') }}" href="/dashboard/controllers/scenery">Scenery</a>
             <a class="nav-link {{ Nav::urlDoesContain('dashboard/controllers/stats') }}" href="/dashboard/controllers/stats">Statistics</a>
             <a class="nav-link {{ Nav::urlDoesContain('dashboard/controllers/incident/report') }}" href="/dashboard/controllers/incident/report">Incident Report</a>
@@ -29,13 +25,13 @@
                 <b class="caret float-right fas fa-caret-left"></b>
             </p>
             <div class="content">
-                <a class="nav-link" href="https://scheduling.ztlartcc.org?first_name={{ Auth::user()->fname }}&last_name={{ Auth::user()->lname }}&email={{ Auth::user()->email }}&cid={{ Auth::id() }}" target="_blank">Schedule a Training Session</a>
+                <a class="nav-link" href="/dashboard/training/schedule" target="_blank">Schedule a Training Session</a>
                 <a class="nav-link {{ Nav::urlDoesContain('dashboard/training/info') }}" href="/dashboard/training/info">Training Information</a>
                 <a class="nav-link {{ Nav::urlDoesContain('/dashboard/training/atcast') }}" href="/dashboard/training/atcast">ATCast Videos</a>
                 <a class="nav-link {{ Nav::urlDoesContain('/dashboard/training/trainer_feedback') }}" href="/dashboard/training/trainer_feedback/new">Leave INS/MTR Feedback</a>
                 @if(Auth::user()->isAbleTo('train'))
                     <a class="nav-link {{ Nav::urlDoesContain('dashboard/training/tickets') }}" href="/dashboard/training/tickets">Training Tickets</a>
-                    <a class="nav-link" href="https://scheduling.ztlartcc.org/index.php/user/login" target="_blank">Schedule Management</a>
+                    <a class="nav-link" href="https://training.vhcf.net/index.php/user/login" target="_blank">Schedule Management</a>
                     @if(Auth::user()->hasRole('ins') || Auth::user()->isAbleTo('snrStaff'))
                         <a class="nav-link {{ Nav::urlDoesContain('dashboard/training/ots-center') }}" href="/dashboard/training/ots-center">OTS Center</a>
                     @endif
@@ -64,7 +60,6 @@
                     <a class="nav-link {{ Nav::urlDoesContain('dashboard/admin/feedback') }}" href="/dashboard/admin/feedback">Feedback Management</a>
                 @endif
                 @if(Auth::user()->isAbleTo('email'))
-                    <a class="nav-link" href="https://accounts.zoho.in/" target="_blank">Staff Webmail</a>
                     <a class="nav-link {{ Nav::urlDoesContain('dashboard/admin/email/send') }}" href="/dashboard/admin/email/send">Send New Email</a>
                 @endif
                 @if(Auth::user()->isAbleTo('staff'))

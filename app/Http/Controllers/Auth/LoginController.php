@@ -80,7 +80,7 @@ class LoginController extends Controller {
 
         if (App::environment('local')) {
             $resourceOwner->data->cid = "10000002";
-            $resourceOwner->data->personal->email = "dev@ztl.local";
+            $resourceOwner->data->personal->email = "dev@hcf.local";
         }
 
         $result = $client->request('GET', Config::get('vatusa.base').'/v2/user/' . $resourceOwner->data->cid . '?apikey=' . Config::get('vatusa.api_key'), ['http_errors' => false]);
@@ -114,10 +114,10 @@ class LoginController extends Controller {
             if (!$userstatuscheck) {
                 $devUser = new User;
                 $devUser->id = 10000002;
-                $devUser->fname = "ZTL";
+                $devUser->fname = "HCF";
                 $devUser->lname = "Development";
                 $devUser->initials = "ZD";
-                $devUser->email = "dev@ztl.local";
+                $devUser->email = "dev@hcf.local";
                 $devUser->rating_id = 2;
                 $devUser->visitor = 0;
                 $devUser->status = 1;

@@ -19,7 +19,7 @@ class AtcBooking extends Model {
 
     public const DIVISION = "USA";
 
-    public const SUBDIVISION = "ZTL";
+    public const SUBDIVISION = "HCF";
 
     public function getStartDateFormattedAttribute() {
         return Carbon::create($this->start)->format('l, M jS');

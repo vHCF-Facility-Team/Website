@@ -25,7 +25,7 @@ class BugReport extends Mailable implements ShouldQueue {
      */
     public function envelope(): Envelope {
         return new Envelope(
-            from: new ZTLAddress('bugs', 'vZTL ARTCC Bugs'),
+            from: new ZTLAddress('bugs', 'vHCF ARTCC Bugs'),
             replyTo: [
                 new Address($this->reporter->email, $this->reporter->full_name)
             ],

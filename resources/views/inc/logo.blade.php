@@ -1,5 +1,5 @@
 @php
-    $logo_id = 'ztl_logo_';
+    $logo_id = 'logo_solid';
     $logo_bg_color = 'white';
     if(isset($color)) {
         if(in_array($color, ['white','black'])) {
@@ -30,4 +30,4 @@
         @php ($logo_id = 'ztl_logo_santa-b')
     @endif
 @endtoggle
-<img src="/photos/logos/{{ $logo_id }}{{ $logo_bg_color }}.png">
+<img src="/photos/logos/{{ $logo_id }}.png">

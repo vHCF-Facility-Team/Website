@@ -24,7 +24,7 @@ class TrainingTicketMail extends Mailable implements ShouldQueue {
      */
     public function envelope(): Envelope {
         return new Envelope(
-            from: new ZTLAddress('training', 'vZTL ARTCC Training Department'),
+            from: new ZTLAddress('training', 'vHCF ARTCC Training Department'),
             subject: 'New Training Ticket Submitted',
         );
     }

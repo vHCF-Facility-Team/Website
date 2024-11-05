@@ -29,15 +29,14 @@ Route::get('/pilots/scenery/view/{id}', 'FrontController@showScenery');
 Route::post('/pilots/scenery/search', 'FrontController@searchScenery');
 Route::get('/pilots/request-staffing', 'FrontController@showStaffRequest');
 Route::post('/pilots/request-staffing', 'FrontController@staffRequest')->name('staffRequest');
-Route::get('/pilots/guide/atl', 'FrontController@pilotGuideAtl');
+Route::get('/pilots/guide/hnl', 'FrontController@pilotGuideAtl');
 Route::get('/feedback/new', 'FrontController@newFeedback');
 Route::get('/feedback/new/{slug}', 'FrontController@newFeedback');
 Route::post('/feedback/new', 'FrontController@saveNewFeedback')->name('saveNewFeedback');
 Route::get('/trainer_feedback/new', 'FrontController@newTrainerFeedback');
 Route::post('/trainer_feedback/new', 'TrainingDash@saveNewTrainerFeedback')->name('saveNewTrainerFeedback');
 Route::get('controllers/files', 'FrontController@showFiles');
-Route::get('/ramp-status/atl', 'FrontController@showAtlRamp');
-Route::get('/ramp-status/clt', 'FrontController@showCltRamp');
+Route::get('/ramp-status/hnl', 'FrontController@showHnlRamp');
 Route::get('/asset/{slug}', 'FrontController@showPermalink');
 Route::get('/live', 'FrontController@showLiveEventInfo');
 
@@ -113,6 +112,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::prefix('training')->group(function () {
         Route::get('atcast', 'TrainingDash@showatcast');
         Route::get('/req', 'TrainingDash@ShowReq');
+        Route::get('/schedule', 'TrainingDash@handleSchedule');
         Route::prefix('tickets')->middleware('permission:train')->group(function () {
             Route::get('/', 'TrainingDash@ticketsIndex');
             Route::post('/search', 'TrainingDash@searchTickets');

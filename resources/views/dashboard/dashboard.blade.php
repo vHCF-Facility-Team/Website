@@ -41,14 +41,14 @@ Dashboard
         </div>
         <div class="col-sm-3">
             <div class="card card-body">
-                <h5>Central Time Now:</h5>
-                <iframe src="https://www.clocklink.com/html5embed.php?clock=043&timezone=CST&color=black&size=180&Title=&Message=&Target=&From=2019,1,1,0,0,0&Color=black" frameborder="0" allowTransparency="true"></iframe>
+                <h5>German Time Now:</h5>
+                <iframe src="https://www.clocklink.com/html5embed.php?clock=043&timezone=CET&color=black&size=180&Title=&Message=&Target=&From=2019,1,1,0,0,0&Color=black" frameborder="0" allowTransparency="true"></iframe>
             </div>
         </div>
         <div class="col-sm-3">
             <div class="card card-body">
-                <h5>Pacific Time Now:</h5>
-                <iframe src="https://www.clocklink.com/html5embed.php?clock=043&timezone=PST&color=black&size=180&Title=&Message=&Target=&From=2019,1,1,0,0,0&Color=black" frameborder="0" allowTransparency="true"></iframe>
+                <h5>Hawaii Time Now:</h5>
+                <iframe src="https://www.clocklink.com/html5embed.php?clock=043&timezone=AHST&color=black&size=180&Title=&Message=&Target=&From=2019,1,1,0,0,0&Color=black" frameborder="0" allowTransparency="true"></iframe>
             </div>
         </div>
     </div>
@@ -64,9 +64,9 @@ Dashboard
             @endif
         </div>
         <div class="col-sm-3">
-            <a class="btn btn-secondary btn-block" href="https://scheduling.ztlartcc.org?name_first={{ Auth::user()->fname }}&name_last={{ Auth::user()->lname }}&email={{ Auth::user()->email }}&cid={{ Auth::id() }}" target="_blank">Schedule a Training Session</a>
+            <a class="btn btn-secondary btn-block" href="https://training.vhcf.net/index.php?name_first={{ Auth::user()->fname }}&name_last={{ Auth::user()->lname }}&email={{ Auth::user()->email }}&cid={{ Auth::id() }}" target="_blank">Schedule a Training Session</a>
             @if(Auth::user()->isAbleTo('staff'))
-                <a class="btn btn-secondary btn-block" href="http://mail.ztlartcc.org" target="_blank">Email</a>
+                <a class="btn btn-secondary btn-block" href="http://mail.google.com" target="_blank">Email</a>
             @endif
         </div>
         <div class="col-sm-3">
@@ -134,7 +134,7 @@ Dashboard
         </div>
     </div>
     <hr>
-    <h4 class="text-center"><i class="fa fa-plane"></i> Flights Currently Within ZTL Airspace</h4>
+    <h4 class="text-center"><i class="fa fa-plane"></i> Flights Currently Within HCF Airspace</h4>
     <div class="table">
         <table class="table table-bordered table-sm">
             <thead class="text-center">
@@ -159,7 +159,7 @@ Dashboard
                     @endforeach
                 @else
                     <tr>
-                        <td class="text-center" colspan="6"><i>No Pilots in ZTL Airspace</i></td>
+                        <td class="text-center" colspan="6"><i>No Pilots in HCF Airspace</i></td>
                     </tr>
                 @endif
             </tbody>

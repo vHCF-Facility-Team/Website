@@ -47,7 +47,7 @@ class LaratrustSeeder extends Seeder {
         ]);
         DB::table('roles')->insert([
              'name' => 'fe',
-             'display_name' => 'Assistant Facility Engineer'
+             'display_name' => 'Facility Engineer'
         ]);
         DB::table('roles')->insert([
              'name' => 'afe',
@@ -73,13 +73,13 @@ class LaratrustSeeder extends Seeder {
         // Adds Permissions to the Permissions Table
         DB::table('permissions')->insert([
              'name' => 'snrStaff',
-             'display_name' => 'ATM, DATM, TA, ATA, WM, AWM',
+             'display_name' => 'ATM, DATM, TA, ATA, WM, AWM, FE',
              'description' => ''
         ]);
         DB::table('permissions')->insert([
              'name' => 'staff',
              'display_name' => 'Staff',
-             'description' => 'snrStaff + EC, AEC, FE, AFE'
+             'description' => 'snrStaff + EC, AEC, AFE'
         ]);
         DB::table('permissions')->insert([
              'name' => 'ins',

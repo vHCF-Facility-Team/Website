@@ -70,21 +70,17 @@ class UploadTrainingTickets extends Command {
     private function vatusaizePosition($ticket) {
         switch($ticket->position) {
             case 100:
-            case 101: return 'ZTL_DEL';
-            case 105: return 'ZTL_GND';
-            case 109: return 'ZTL_TWR';
-            case 115: return 'ZTL_APP';
-            case 102: return 'CLT_DEL';
-            case 106: return 'CLT_GND';
-            case 111: return 'CLT_TWR';
-            case 116: return 'CLT_APP';
-            case 104: return 'ATL_DEL';
-            case 108: return 'ATL_GND';
-            case 113: return 'ATL_TWR';
+            case 101: return 'HCF_DEL';
+            case 105: return 'HCF_GND';
+            case 109: return 'HCF_TWR';
+            case 115: return 'HCF_APP';
+            case 104: return 'HNL_DEL';
+            case 108: return 'HNL_GND';
+            case 113: return 'HNL_TWR';
             case 117:
             case 118:
-            case 119: return 'ATL_APP';
-            case 121: return 'ZTL_CTR';
+            case 119: return 'HNL_APP';
+            case 121: return 'HNL_CTR';
             default: return null;
         }
     }

@@ -38,7 +38,7 @@ class Realops extends Mailable implements ShouldQueue {
      */
     public function envelope(): Envelope {
         return new Envelope(
-            from: new ZTLAddress("realops", "ZTL Realops"),
+            from: new ZTLAddress("realops", "HCF Realops"),
             subject: $this->generateSubject()
         );
     }

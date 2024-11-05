@@ -40,8 +40,8 @@ View Training Ticket
             <p><b>Trainer Name:</b> {{ $ticket->trainer_name }}</p>
             <p><b>Session Name/Type:</b> {{ $ticket->type_name }} on {{ $ticket->position_name }}</p>
             <p><b>Session Date:</b> {{ $ticket->date }}</p>
-            <p><b>Start Time:</b> {{ $ticket->start_time }} ET</p>
-            <p><b>End Time:</b> {{ $ticket->end_time }} ET</p>
+            <p><b>Start Time:</b> {{ $ticket->start_time }} Zulu</p>
+            <p><b>End Time:</b> {{ $ticket->end_time }} Zulu</p>
             <p><b>Duration:</b> {{ $ticket->duration }}</p>
 	        <p><b>Score:</b> 
             @if($ticket->score) 

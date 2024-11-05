@@ -230,7 +230,7 @@ class AdminDash extends Controller {
 
         $stats = ControllerLog::aggregateAllControllersByPosAndQuarter($year, $month);
         $homec = User::where('visitor', 0)->where('status', 1)->orderBy('lname', 'ASC')->get();
-        $visitc = User::where('visitor', 1)->where('status', 1)->where('visitor_from', '!=', 'ZHU')->where('visitor_from', '!=', 'ZJX')->orderBy('lname', 'ASC')->get();
+        $visitc = User::where('visitor', 1)->where('status', 1)->orderBy('lname', 'ASC')->get();
         $trainc = User::orderBy('lname', 'ASC')->get()->filter(function ($user) {
             return $user->hasRole('mtr') || $user->hasRole('ins');
         });
@@ -396,15 +396,15 @@ class AdminDash extends Controller {
             }
         }
         if (Auth::user()->isAbleTo('roster') || Auth::user()->isAbleTo('train')) { // Update training certifications
-            $positions = ['gnd','clt_del','clt_gnd','clt_twr','clt_app','atl_del','atl_gnd','atl_twr','atl_app','twr_solo_fields'];
+            $positions = ['gnd','hnl_del','hnl_gnd','hnl_twr','hnl_app','twr_solo_fields'];
             foreach ($positions as $position) {
                 $user[$position] = ($request->input($position)) ? $request->input($position) : $user[$position];
             }
             $positions = ['twr','app','ctr'];
             $solo_facilities = [ // Facilities submitted to VATUSA for solo certs
-                'twr' => 'GSO',
-                'app' => 'GSO',
-                'ctr' => 'ZTL'];
+                'twr' => 'HNL',
+                'app' => 'HNL',
+                'ctr' => 'HNL'];
             foreach ($positions as $solo_id => $position) {
                 if ($user[$position] == $user->getMagicNumber('SOLO_CERTIFICATION')) {
                     if ($request->input($position) != 0) {

@@ -214,38 +214,13 @@ class TrainingDash extends Controller {
             if ($tickets_sort->isEmpty() && ($search_result->status != 1)) {
                 return redirect()->back()->with('error', 'There is no controller that exists with that CID.');
             }
-            $exams = $this->getAcademyExamTranscript($request->id);
+            $exams = User::getAcademyExamTranscriptByCid($request->id);
         } else {
             $tickets = null;
             $exams = null;
         }
 
         return view('dashboard.training.tickets')->with('controllers', $controllers)->with('search_result', $search_result)->with('tickets', $tickets)->with('exams', $exams)->with('drafts', $drafts);
-    }
-
-    public function getAcademyExamTranscript($cid) {
-        $req_params = [
-            'form_params' => [],
-            'http_errors' => false
-        ];
-        $client = new Client();
-        $res = $client->request('GET', Config::get('vatusa.base').'/v2/academy/transcript/' . $cid . '?apikey=' . Config::get('vatusa.api_key'), $req_params);
-        $academy = (string) $res->getBody();
-        $exams = ['BASIC' => ['date' => null, 'success' => 3, 'grade' => null], 'S2' => ['date' => null, 'success' => 3, 'grade' => null], 'S3' => ['date' => null, 'success' => 3, 'grade' => null], 'C1' => ['date' => null, 'success' => 3, 'grade' => null]];
-        $academy = json_decode($academy, true);
-        $exam_names = array_keys($exams);
-        foreach ($exam_names as $exam) {
-            if (isset($academy['data'][$exam])) {
-                foreach ($academy['data'][$exam] as $exam_attempt) {
-                    if (is_null($exams[$exam]['date']) || ($exam_attempt['grade'] > $exams[$exam]['grade'])) {
-                        $exams[$exam]['date'] = date("m/d/y", $exam_attempt['time_finished']);
-                        $exams[$exam]['success'] = ($exam_attempt['grade'] >= 80) ? 1 : 0;
-                        $exams[$exam]['grade'] = $exam_attempt['grade'];
-                    }
-                }
-            }
-        }
-        return $exams;
     }
 
     public function searchTickets(Request $request) {
@@ -328,19 +303,22 @@ class TrainingDash extends Controller {
 
     public function deleteTicket($id) {
         $ticket = TrainingTicket::find($id);
-        if (Auth::user()->isAbleTo('snrStaff')) {
+        $draft = $ticket->draft;
+        if (Auth::user()->isAbleTo('snrStaff') || (Auth::id() == $ticket->trainer_id && $draft)) {
             $controller_id = $ticket->controller_id;
             $ticket->delete();
 
-            $audit = new Audit;
-            $audit->cid = Auth::id();
-            $audit->ip = $_SERVER['REMOTE_ADDR'];
-            $audit->what = Auth::user()->full_name . ' deleted a training ticket for ' . User::find($controller_id)->full_name . '.';
-            $audit->save();
+            if (! $draft) {
+                $audit = new Audit;
+                $audit->cid = Auth::id();
+                $audit->ip = $_SERVER['REMOTE_ADDR'];
+                $audit->what = Auth::user()->full_name . ' deleted a training ticket for ' . User::find($controller_id)->full_name . '.';
+                $audit->save();
+            }
 
             return redirect('/dashboard/training/tickets?id=' . $controller_id)->with('success', 'The ticket has been deleted successfully.');
         } else {
-            return redirect()->back()->with('error', 'Only the TA can delete training tickets.');
+            return redirect()->back()->with('error', 'Only the TA can delete non-draft training tickets.');
         }
     }
 
@@ -392,7 +370,7 @@ class TrainingDash extends Controller {
             $ins = User::find($ots->ins_id);
             $controller = User::find($ots->controller_id);
 
-            Mail::to($ins->email)->cc('training@ztlartcc.org')->send(new OtsAssignment($ots, $controller, $ins));
+            Mail::to($ins->email)->cc('hcf-ta@vatusa.net')->send(new OtsAssignment($ots, $controller, $ins));
 
             $audit = new Audit;
             $audit->cid = Auth::id();
@@ -444,19 +422,16 @@ class TrainingDash extends Controller {
 
     public function getTicketSortCategory($position, $draft) {
         switch (true) {
-            case ($draft):
-                return 'drafts';
-                break;
             case ($position > 6 && $position < 22): // Legacy types
                 return 's1';
                 break;
-            case (in_array($position, [100, 101, 102, 105, 106])):
+            case (in_array($position, [100, 101, 102, 104, 105, 106, 108])):
                 return 's1';
                 break;
             case ($position > 21 && $position < 31): // Legacy types
                 return 's2';
                 break;
-            case (in_array($position, [103, 104, 107, 108, 109, 110, 111, 113])):
+            case (in_array($position, [103, 107, 109, 110, 111, 113])):
                 return 's2';
                 break;
             case ($position > 30 && $position < 42): // Legacy types
@@ -586,7 +561,7 @@ class TrainingDash extends Controller {
             $trainerStats['C1'] = $trainerSesh->where('position', 120)->count();
             $trainerStats['C1'] += $trainerSesh->where('position', 121)->count();
             $trainerStats['Other'] = $trainerStats['total'] - $trainerStats['S1'] - $trainerStats['S2'] - $trainerStats['S3'] - $trainerStats['C1'];
-            if ($trainerStats['total'] < Config::get('ztl.trainer_min_sessions')) {
+            if ($trainerStats['total'] < Config::get('hcf.trainer_min_sessions')) {
                 $trainingStaffBelowMins++;
             }
             $trainerSessions[] = $trainerStats;
@@ -658,7 +633,7 @@ class TrainingDash extends Controller {
                     $percentSessionsCompleteChange = '+' . $percentSessionsCompleteChange;
                 }
             }
-            $retArr['taMonthlyReport'] = "In the Month of " . Carbon::createFromDate($retArr['date']['start_date'])->format('F') . ", ZTL has offered " . $retArr['sessionsPerMonth'] . " training sessions (" . $percentSessionsChange . "% change from " . Carbon::createFromDate($retArr['date']['start_date'])->subMonths(1)->format('F') . "). " . $retArr['sessionsCompletePerMonth'] . " sessions were completed (" . $percentSessionsCompleteChange . "%), with " . $retArr['sessionsPerMonthNoShow'] . " known no-shows. " . $trainingStaffBelowMins . " Training Staff members did not meet monthly minimums.";
+            $retArr['taMonthlyReport'] = "In the Month of " . Carbon::createFromDate($retArr['date']['start_date'])->format('F') . ", HCF has offered " . $retArr['sessionsPerMonth'] . " training sessions (" . $percentSessionsChange . "% change from " . Carbon::createFromDate($retArr['date']['start_date'])->subMonths(1)->format('F') . "). " . $retArr['sessionsCompletePerMonth'] . " sessions were completed (" . $percentSessionsCompleteChange . "%), with " . $retArr['sessionsPerMonthNoShow'] . " known no-shows. " . $trainingStaffBelowMins . " Training Staff members did not meet monthly minimums.";
         }
         return $retArr;
     }
@@ -718,7 +693,7 @@ class TrainingDash extends Controller {
             }
             $gbPlot = new \AccBarPlot($plotArray);
             $graph->Add($gbPlot);
-            $line = new \PlotLine(HORIZONTAL, Config::get('ztl.trainer_min_sessions'), 'red', 1);
+            $line = new \PlotLine(HORIZONTAL, Config::get('hcf.trainer_min_sessions'), 'red', 1);
             $graph->AddLine($line);
             $graph->legend->SetColumns(5);
             $graph->legend->Pos(0.5, 0.1, "center", "top");
@@ -802,6 +777,17 @@ class TrainingDash extends Controller {
         $redirect = ($request->input('redirect_to') == 'internal') ? '/dashboard' : '/';
         return redirect($redirect)->with('success', 'Thank you for the feedback! It has been received successfully.');
     }
+
+    public function handleSchedule() {
+        $user = Auth::user();
+
+        if ($user->rating_id == 1 && !$user->onboarding_complete) {
+            return redirect()->back()->with('error', 'Onboarding must be complete before scheduling a training session. Please refer to the HCF onboarding course on the VATUSA Academy. Contact the TA with questions or concerns.');
+        }
+
+        return redirect("https://training.vhcf.net/index.php?name_first={$user->fname}&last_name={$user->lname}&email={$user->email}&cid={$user->id}");
+    }
+
     private function saveNewTicket(Request $request, $id) {
         $request->validate([
             'controller' => 'required',
@@ -846,7 +832,7 @@ class TrainingDash extends Controller {
         $controller = User::find($ticket->controller_id);
         $trainer = User::find($ticket->trainer_id);
 
-        Mail::to($controller->email)->cc('training@ztlartcc.org')->send(new TrainingTicketMail($ticket, $controller, $trainer));
+        Mail::to($controller->email)->cc('hcf-ta@vatusa.net')->send(new TrainingTicketMail($ticket, $controller, $trainer));
 
         if ($request->ots == 1) {
             $ots = new Ots;

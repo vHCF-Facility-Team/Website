@@ -3,7 +3,7 @@
 @section('content')
 <p>Dear {{ $controller->full_name }},</p>
 
-<p>You have new training team feedback that has been approved. You can see the details below or from the <a href="https://www.ztlartcc.org/dashboard/controllers/profile">"My Profile"</a> page on the website.</p>
+<p>You have new training team feedback that has been approved. You can see the details below or from the <a href="https://www.vhcf.net/dashboard/controllers/profile">"My Profile"</a> page on the website.</p>
 <br>
 
 <p><b>Submitted at:</b> {{ $feedback->created_at }}</p>
@@ -20,9 +20,9 @@
 @endif
 <br>
 
-<p>If you have any thoughts/comments, please email the TA at <a href="mailto:ta@ztlartcc.org">ta@ztlartcc.org</a>.</p>
+<p>If you have any thoughts/comments, please email the TA at <a href="mailto:hcf-ta@vatusa.net">hcf-ta@vatusa.net</a>.</p>
 <br>
 
 <p>Sincerely,</p>
-<p>ZTL ARTCC Training Team</p>
+<p>HCF ARTCC Training Team</p>
 @endsection

@@ -25,7 +25,7 @@ class ReqStaffing extends Mailable implements ShouldQueue {
      */
     public function envelope(): Envelope {
         return new Envelope(
-            from: new ZTLAddress('info', 'vZTL ARTCC Staffing Requests'),
+            from: new ZTLAddress('info', 'vHCF ARTCC Staffing Requests'),
             replyTo: [
                 new Address($this->email, $this->name)
             ],

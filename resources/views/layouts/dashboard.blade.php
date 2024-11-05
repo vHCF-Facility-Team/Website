@@ -5,9 +5,9 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="vZTL ARTCC Website. For entertainment purposes only. Do not use for real world purposes. Part of the VATSIM Network.">
-        <meta name="keywords" content="ztl,vatusa,vatsim,atlanta,center,georgia,artcc,aviation,airplane,airport,charlotte,controller,atc,air,traffic,control,pilot">
-        <meta name="author" content="ZTL Web Team">
+        <meta name="description" content="vHCF ARTCC Website. For entertainment purposes only. Do not use for real world purposes. Part of the VATSIM Network.">
+        <meta name="keywords" content="hcf,vatusa,vatsim,honolulu,center,hawaii,artcc,aviation,airplane,airport,charlotte,controller,atc,air,traffic,control,pilot">
+        <meta name="author" content="HCF Web Team">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         {{-- Stylesheets --}}
@@ -41,7 +41,7 @@
 
         {{-- Title --}}
         <title>
-            @yield('title') | ZTL ARTCC
+            @yield('title') | HCF ARTCC
         </title>
     </head>
     <body>

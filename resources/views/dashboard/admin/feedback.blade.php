@@ -147,11 +147,11 @@ Feedback Management
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <label for="name">Your Name</label>
-                                                    {{ html()->text('name', 'vZTL ARTCC Staff')->class(['form-control']) }}
+                                                    {{ html()->text('name', 'vHCF ARTCC Staff')->class(['form-control']) }}
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label for="email">Your Email</label>
-                                                    {{ html()->email('email', 'feedback@notams.ztlartcc.org')->class(['form-control']) }}
+                                                    {{ html()->email('email', 'feedback@vhcf.net')->class(['form-control']) }}
                                                 </div>
                                             </div>
                                             <br>
@@ -272,11 +272,11 @@ Feedback Management
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <label for="name">Your Name</label>
-                                                {{ html()->text('name', 'vZTL ARTCC Staff')->class(['form-control']) }}
+                                                {{ html()->text('name', 'vHCF ARTCC Staff')->class(['form-control']) }}
                                             </div>
                                             <div class="col-sm-6">
                                                 <label for="email">Your Email</label>
-                                                {{ html()->email('email', 'feedback@notams.ztlartcc.org')->class(['form-control']) }}
+                                                {{ html()->email('email', 'feedback@vhcf.net')->class(['form-control']) }}
                                             </div>
                                         </div>
                                         <br>

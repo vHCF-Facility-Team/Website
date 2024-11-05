@@ -4,6 +4,8 @@ namespace App;
 
 use Carbon\Carbon;
 use Carbon\CarbonTimeZone;
+use Config;
+use GuzzleHttp\Client;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laratrust\Contracts\LaratrustUser;
@@ -18,6 +20,35 @@ class User extends Authenticatable implements LaratrustUser {
 
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    public function getAcademyExamTranscript() {
+        return User::getAcademyExamTranscriptByCid($this->id);
+    }
+
+    public static function getAcademyExamTranscriptByCid($cid) {
+        $req_params = [
+            'form_params' => [],
+            'http_errors' => false
+        ];
+        $client = new Client();
+        $res = $client->request('GET', Config::get('vatusa.base').'/v2/academy/transcript/' . $cid . '?apikey=' . Config::get('vatusa.api_key'), $req_params);
+        $academy = (string) $res->getBody();
+        $exams = ['BASIC' => ['date' => null, 'success' => 3, 'grade' => null], 'S2' => ['date' => null, 'success' => 3, 'grade' => null], 'S3' => ['date' => null, 'success' => 3, 'grade' => null], 'C1' => ['date' => null, 'success' => 3, 'grade' => null]];
+        $academy = json_decode($academy, true);
+        $exam_names = array_keys($exams);
+        foreach ($exam_names as $exam) {
+            if (isset($academy['data'][$exam])) {
+                foreach ($academy['data'][$exam] as $exam_attempt) {
+                    if (is_null($exams[$exam]['date']) || ($exam_attempt['grade'] > $exams[$exam]['grade'])) {
+                        $exams[$exam]['date'] = date("m/d/y", $exam_attempt['time_finished']);
+                        $exams[$exam]['success'] = ($exam_attempt['grade'] >= 80) ? 1 : 0;
+                        $exams[$exam]['grade'] = $exam_attempt['grade'];
+                    }
+                }
+            }
+        }
+        return $exams;
     }
 
     public function getBackwardsNameAttribute() {
@@ -160,22 +191,19 @@ class User extends Authenticatable implements LaratrustUser {
     protected const TRAIN_CLT_DEL_GND = 2;
     protected const TRAIN_UNRES_TWR = 3;
     protected const TRAIN_CLT_TWR = 4;
-    protected const TRAIN_ATL_TWR = 5;
+    protected const TRAIN_HNL_TWR = 5;
     protected const TRAIN_UNRES_APP = 6;
     protected const TRAIN_CLT_APP = 7;
-    protected const TRAIN_ATL_APP = 8;
+    protected const TRAIN_HNL_APP = 8;
     protected const TRAIN_CTR = 9;
 
     protected static $TrainingLevel = [
         self::TRAIN_UNABLE => 'Unable to Train',
         self::TRAIN_UNRES_GND => 'Unrestricted DEL & GND',
-        self::TRAIN_CLT_DEL_GND => 'CLT DEL & GND',
         self::TRAIN_UNRES_TWR => 'Unrestricted TWR',
-        self::TRAIN_CLT_TWR => 'CLT TWR',
-        self::TRAIN_ATL_TWR => 'ATL TWR',
+        self::TRAIN_HNL_TWR => 'HNL TWR',
         self::TRAIN_UNRES_APP => 'Unrestricted Approach',
-        self::TRAIN_CLT_APP => 'CLT Approach',
-        self::TRAIN_ATL_APP => 'ATL (A80) Approach',
+        self::TRAIN_HNL_APP => 'HCF Approach',
         self::TRAIN_CTR => 'Center'
     ];
 
@@ -219,9 +247,6 @@ class User extends Authenticatable implements LaratrustUser {
 
     protected static $UncertifiedCertifiedA80 = [
         self::UNCERTIFIED => 'None',
-        self::TRACON_SAT_CERTIFIED => 'A80 SAT Certified',
-        self::TRACON_DR_CERTIFIED => 'A80 DR Certified',
-        self::TRACON_TAR_CERTIFIED => 'A80 TAR Certified',
         self::CERTIFIED => 'Certified'
     ];
 

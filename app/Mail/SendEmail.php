@@ -29,7 +29,7 @@ class SendEmail extends Mailable implements ShouldQueue {
             replyTo: [
                 new Address($this->replyToAddress, $this->replyToName)
             ],
-            subject: '[vZTL ARTCC] ' . $this->subject,
+            subject: '[vHCF ARTCC] ' . $this->subject,
         );
     }
 

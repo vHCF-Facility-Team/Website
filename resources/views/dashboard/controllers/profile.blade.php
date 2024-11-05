@@ -144,7 +144,7 @@ Profile
                                     <td scope="col">{{ $ea_appointment->res_time }} {{ Auth::user()->timezone_abbr }}</td>
                                     <td scope="col">{{ $ea_appointment->service_description }}</td>
                                     <td scope="col">{{ $ea_appointment->staff_name }}</td>
-                                    <td scope="col"><a href="https://scheduling.ztlartcc.org/index.php/booking/reschedule/{{ $ea_appointment->link_token }}?name_first={{ Auth::user()->fname }}&name_last={{ Auth::user()->lname }}&email={{ Auth::user()->email }}&cid={{ Auth::id() }}" target="_blank" class="btn btn-primary simple-tooltip" data-toggle="tooltip" title="View"><i class="fas fa-edit fa-fw"></i></a></td>
+                                    <td scope="col"><a href="https://training.vhcf.net/index.php/calendar/reschedule/{{ $ea_appointment->link_token }}?name_first={{ Auth::user()->fname }}&name_last={{ Auth::user()->lname }}&email={{ Auth::user()->email }}&cid={{ Auth::id() }}" target="_blank" class="btn btn-primary simple-tooltip" data-toggle="tooltip" title="View"><i class="fas fa-edit fa-fw"></i></a></td>
                                 </tr>   
                             @endforeach
                         @else
@@ -208,7 +208,7 @@ Profile
                             </div>profile.
                         @else
                             <div class="col-4">
-                                <a href="#" data-toggle="tooltip" title="No Discord ID Found: Ensure your Discord ID is linked to your VATUSA account. The roster may take time to refresh. You can manually update your role in the ZTL Discord server in the meantime." class="btn btn-secondary" type="button">Update Discord Role</a>
+                                <a href="#" data-toggle="tooltip" title="No Discord ID Found: Ensure your Discord ID is linked to your VATUSA account. The roster may take time to refresh. You can manually update your role in the HCF Discord server in the meantime." class="btn btn-secondary" type="button">Update Discord Role</a>
                             </div>
                         @endif
                     @endtoggle
@@ -289,7 +289,7 @@ Profile
             </div>
             <br>
             <div class="container">
-                <p>Please note that opting out of broadcast emails will only prevent you from receiving broadcast emails issued from staff. Personalized emails (both automated and issued by staff) will not be affected. If you have any questions, please contact the ATM at <a href="mailto:atm@ztlartcc.org">atm@ztlartcc.org</a>.</p>
+                <p>Please note that opting out of broadcast emails will only prevent you from receiving broadcast emails issued from staff. Personalized emails (both automated and issued by staff) will not be affected. If you have any questions, please contact the ATM at <a href="mailto:hcf-atm@vatusa.net">hcf-atm@vatusa.net</a>.</p>
             </div>
             <div class="modal-footer">
                 <a href="{{ url()->current() }}" class="btn btn-secondary">Close</a>
@@ -307,7 +307,7 @@ Profile
             </div>
             <br>
             <div class="container">
-                <p>Opting into emails will only affect the recieving of mass emails. If you elect to opt into emails, you agree to recieve mass emails sent to groups of members of the vZTL ARTCC. This selection will not affect the reception of personalized emails (both automated and issued by staff) for example, training ticket emails. If you have any questions, please contact the ATM at <a href="mailto:atm@ztlartcc.org">atm@ztlartcc.org</a>.</p>
+                <p>Opting into emails will only affect the recieving of mass emails. If you elect to opt into emails, you agree to recieve mass emails sent to groups of members of the vHCF ARTCC. This selection will not affect the reception of personalized emails (both automated and issued by staff) for example, training ticket emails. If you have any questions, please contact the ATM at <a href="mailto:hcf-atm@vatusa.net">hcf-atm@vatusa.net</a>.</p>
                 <p>You may opt out at any time by using the slider shown on the profile page.</p>
                 <br>
                 <i>Please check the following check boxes if you would like to continue.</i>
@@ -315,10 +315,10 @@ Profile
                 {{ html()->form()->route('optIn')->open() }}
                 <div class="form-group">
                     {{ html()->checkbox('opt', false, '1') }}
-                    <label for="opt" class="form-label">I agree to recieve mass emails from the vZTL ARTCC.</label>
+                    <label for="opt" class="form-label">I agree to recieve mass emails from the vHCF ARTCC.</label>
                     <br>
                     {{ html()->checkbox('privacy', false, '1') }}
-                    <label for="privacy" class="form-label">I have read and agree to the vZTL ARTCC Privacy Policy.</label>
+                    <label for="privacy" class="form-label">I have read and agree to the vHCF ARTCC Privacy Policy.</label>
                 </div>
             </div>
             <div class="modal-footer">
