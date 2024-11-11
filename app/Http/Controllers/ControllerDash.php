@@ -270,7 +270,7 @@ class ControllerDash extends Controller {
             $file->timestamps = false;
             $file->save();
         }
-        $euroscope = File::where('type', 78)->orderBy('disp_order', 'ASC')->get();
+        $euroscope = File::where('type', 8)->orderBy('disp_order', 'ASC')->get();
         for ($x=0;$x<count($euroscope);$x++) {
             $file = File::find($euroscope[$x]['id']);
             $file->disp_order = $x;
@@ -278,7 +278,7 @@ class ControllerDash extends Controller {
             $file->save();
         }
         
-        return view('dashboard.controllers.files')->with('vatis', $vatis)->with('sop', $sop)->with('loa', $loa)->with('staff', $staff)->with('training', $training);
+        return view('dashboard.controllers.files')->with('vatis', $vatis)->with('sop', $sop)->with('loa', $loa)->with('staff', $staff)->with('training', $training)->with('euroscope', $euroscope);
     }
 
     public function showSuggestions() {
