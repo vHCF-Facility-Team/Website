@@ -215,6 +215,7 @@ class TrainingDash extends Controller {
                 return redirect()->back()->with('error', 'There is no controller that exists with that CID.');
             }
             $exams = User::getAcademyExamTranscriptByCid($request->id);
+            $exams = User::getAcademyExamTranscriptByCid($request->id);
         } else {
             $tickets = null;
             $exams = null;
@@ -305,6 +306,8 @@ class TrainingDash extends Controller {
         $ticket = TrainingTicket::find($id);
         $draft = $ticket->draft;
         if (Auth::user()->isAbleTo('snrStaff') || (Auth::id() == $ticket->trainer_id && $draft)) {
+        $draft = $ticket->draft;
+        if (Auth::user()->isAbleTo('snrStaff') || (Auth::id() == $ticket->trainer_id && $draft)) {
             $controller_id = $ticket->controller_id;
             $ticket->delete();
 
@@ -315,9 +318,17 @@ class TrainingDash extends Controller {
                 $audit->what = Auth::user()->full_name . ' deleted a training ticket for ' . User::find($controller_id)->full_name . '.';
                 $audit->save();
             }
+            if (! $draft) {
+                $audit = new Audit;
+                $audit->cid = Auth::id();
+                $audit->ip = $_SERVER['REMOTE_ADDR'];
+                $audit->what = Auth::user()->full_name . ' deleted a training ticket for ' . User::find($controller_id)->full_name . '.';
+                $audit->save();
+            }
 
             return redirect('/dashboard/training/tickets?id=' . $controller_id)->with('success', 'The ticket has been deleted successfully.');
         } else {
+            return redirect()->back()->with('error', 'Only the TA can delete non-draft training tickets.');
             return redirect()->back()->with('error', 'Only the TA can delete non-draft training tickets.');
         }
     }
