@@ -17,8 +17,8 @@ Files
         <br><br>
     @endif
     @php
-        $fileCategories = array('vATIS', 'SOP', 'LOA', 'Training', 'Staff');
-        $restricted = array('Staff'=>'staff', 'Training'=>'train');
+        $fileCategories = array('vATIS', 'SOP', 'LOA', 'Training', 'Euroscope', 'Staff');
+        $restricted = array('Staff'=>'staff', 'Training'=>'train', 'Euroscope'=>'roster');
         $displayedTabs = array();
     @endphp 
     <ul class="nav nav-tabs nav-justified" role="tablist">
@@ -139,7 +139,8 @@ Files
                                         4 => 'SOPs',
                                         5 => 'LOAs',
                                         6 => 'Staff',
-                                        7 => 'Training'
+                                        7 => 'Training',
+                                        8 => 'Euroscope'
                                     ], null)->class(['form-control']) }}
                                 </div>
 							</div>
