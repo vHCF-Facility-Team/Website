@@ -14,7 +14,7 @@ Home
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-8 text-white">
-					<h1><b>Atlanta Virtual ARTCC</b></h1>
+					<h1><b>Honolulu Virtual ARTCC</b></h1>
 				</div>
 			</div>
 		</div>
