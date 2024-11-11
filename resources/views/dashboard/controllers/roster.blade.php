@@ -130,9 +130,9 @@ Roster
                             <!-- Enroute -->
                             <td class="text-center">
                                 @if($c->ctr === $c->getMagicNumber('SOLO_CERTIFICATION'))
-                                <span class="badge badge-warning text-light" data-toggle="tooltip" data-html="true" title="Cert Expires: {{ $c->solo }}<br>{{$c->twr_solo_fields}}">ZTL-SOLO</span>
+                                <span class="badge badge-warning text-light" data-toggle="tooltip" data-html="true" title="Cert Expires: {{ $c->solo }}<br>{{$c->twr_solo_fields}}">HCF-SOLO</span>
                                 @elseif($c->ctr > $c->getMagicNumber('UNCERTIFIED'))
-                                <span class="badge badge-secondary">ZTL</span>
+                                <span class="badge badge-secondary">HCF</span>
                                 @endif
                             </td>
                         </tr>

@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'trainer_min_sessions' => env('ZTL_TRAINER_MONTHLY_SESSIONS', 3),
+    'trainer_min_sessions' => env('HCF_TRAINER_MONTHLY_SESSIONS', 3),
 ];

@@ -62,7 +62,7 @@ class ControllerDash extends Controller {
         $prev_winner_local = LocalHero::where('month', $prev_month->format('n'))->where('year', $prev_month->format('y'))->first();
         $pyrite = Pyrite::where('year', $last_year->format('y'))->first();
 
-        $default_challenge_description = "Control any field/any position other than ATL, CLT, and ZTL";
+        $default_challenge_description = "Control any field/any position other than HNL";
         $local_hero_challenge_this_month = LocalHeroChallenges::where('year', $last_month->format('y'))->where('month', $prev_month->format('n'))->first();
         $local_hero_challenge_prev_month = LocalHeroChallenges::where('year', $prev_month->format('y'))->where('month', $prev_month->format('n'))->first();
         $month_challenge_description = ($local_hero_challenge_this_month) ? $local_hero_challenge_this_month->title : $default_challenge_description;
@@ -568,7 +568,7 @@ class ControllerDash extends Controller {
         $user->opt = 1;
         $user->save();
 
-        return redirect()->back()->with('success', 'You have been opted in successfully and will now receive broadcast emails from the vZTL ARTCC.');
+        return redirect()->back()->with('success', 'You have been opted in successfully and will now receive broadcast emails from the vHCF ARTCC.');
     }
 
     public function optOut() {
@@ -583,7 +583,7 @@ class ControllerDash extends Controller {
         $user->opt = 0;
         $user->save();
 
-        return redirect()->back()->with('success', 'You have been opted out successfully and will no longer receive broadcast emails from the vZTL ARTCC.');
+        return redirect()->back()->with('success', 'You have been opted out successfully and will no longer receive broadcast emails from the vHCF ARTCC.');
     }
 
     public function incidentReport() {
@@ -625,7 +625,7 @@ class ControllerDash extends Controller {
         $error = $request->error;
         $desc = $request->desc;
 
-        Mail::to('wm@ztlartcc.org')->send(new BugReport($reporter, $url, $error, $desc));
+        Mail::to('hcf-wm@vatusa.net')->send(new BugReport($reporter, $url, $error, $desc));
 
         return redirect()->back()->with('success', 'Your bug has been reported successfully.');
     }
@@ -646,9 +646,9 @@ class ControllerDash extends Controller {
             return redirect()->back()->with('error', 'You must have a Discord UID set in order to update your roles.');
         }
 
-        $response = Http::get('http://bot.ztlartcc.org:3000/assignRoles', [
+        /* $response = Http::get('http://bot.ztlartcc.org:3000/assignRoles', [
             'userId' => $user_id,
-        ]);
+        ]); */
 
         if ($response->notFound()) {
             return redirect()->back()->with('error', 'You have not been found in the Discord server. Please make sure you are in the server and your id is correct.');

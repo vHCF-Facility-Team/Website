@@ -207,7 +207,7 @@ Home
 				<button type="button" class="close" style="position:absolute; z-index:100; top:5px; right:15px;" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="text-body"><i class="fas fa-newspaper"></i>&nbsp;ZTL News</h4>
+				<h4 class="text-body"><i class="fas fa-newspaper"></i>&nbsp;HCF News</h4>
 				<hr>
 				@if(count($news) > 0)
 				@foreach($news as $c)
@@ -223,7 +223,7 @@ Home
 					</i></center>
 				@endif
 				<hr>
-				<h4 class="text-body"><i class="fas fa-calendar"></i>&nbsp;ZTL Calendar</h4>
+				<h4 class="text-body"><i class="fas fa-calendar"></i>&nbsp;HCF Calendar</h4>
 				<hr>
 				@if(count($calendar) > 0)
 				@foreach($calendar as $c)

@@ -659,7 +659,7 @@ class AdminDash extends Controller {
             $client = new Client();
             $req_params = [ 'form_params' =>
                 [
-                    'reason' => 'IAW ZTL ARTCC Facility Administrative Policy'
+                    'reason' => 'IAW HCF ARTCC General Operating Procedures'
                 ],
                 'http_errors' => false
             ];
