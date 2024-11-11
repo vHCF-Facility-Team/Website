@@ -270,7 +270,7 @@ class ControllerDash extends Controller {
             $file->timestamps = false;
             $file->save();
         }
-        $euroscope = File::where('type', 78)->orderBy('disp_order', 'ASC')->get();
+        $euroscope = File::where('type', 8)->orderBy('disp_order', 'ASC')->get();
         for ($x=0;$x<count($euroscope);$x++) {
             $file = File::find($euroscope[$x]['id']);
             $file->disp_order = $x;
