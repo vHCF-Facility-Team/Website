@@ -59,7 +59,7 @@ Home
 					@endforeach
 					@else
 					<div class="carousel-item active">
-						<img src="/photos/placeholder_banner.png" class="d-block w-100 rounded" alt="placeholder" />
+						<img src="/photos/logos/logo_solid_2.png" class="d-block w-100 rounded" alt="placeholder" />
 					</div>
 					@endif
 				</div>

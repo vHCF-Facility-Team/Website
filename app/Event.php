@@ -68,7 +68,7 @@ class Event extends Model {
                     throw new ConnectionException;
                 }
             } catch (RequestException | ConnectionException) {
-                return "/photos/placeholder_banner.png";
+                return "/photos/logos/logo_solid_2.png";
             }
             return $this->banner_path;
         }
@@ -79,7 +79,7 @@ class Event extends Model {
         } elseif ($disk->exists($this->banner_base_path . $filename)) {
             return $disk->url($this->banner_base_path . $filename);
         }
-        return "/photos/placeholder_banner.png";
+        return "/photos/logos/logo_solid_2.png";
     }
 
     public function reduceEventBanner() {
