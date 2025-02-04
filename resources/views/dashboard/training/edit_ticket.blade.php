@@ -60,7 +60,7 @@ Edit Training Ticket
                     @if($ticket->draft)
                         @php 
 						    $currentDateUTC = new DateTime("now", new DateTimeZone('Zulu') ); 
-						    $currentTimeUTC = $currentDateET->format('H:i');
+						    $currentTimeUTC = $currentDateUTC->format('H:i');
 					    @endphp
                         <label for="start" class="form-label">Start Time Zulu (now {{ $currentTimeUTC }})</label>
                     @else

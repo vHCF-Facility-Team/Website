@@ -59,7 +59,7 @@ New Training Ticket
                 <div class="form-group">
 					@php 
 						$currentDateUTC = new DateTime("now", new DateTimeZone('Zulu') ); 
-						$currentTimeUTC = $currentDateET->format('H:i');
+						$currentTimeUTC = $currentDateUTC->format('H:i');
 					@endphp
                     <label for="start" class="form-label">Start Time Zulu (now {{ $currentTimeUTC }})</label>
                     <div class="input-group date dt_picker_time" id="datetimepicker2" data-target-input="nearest">
