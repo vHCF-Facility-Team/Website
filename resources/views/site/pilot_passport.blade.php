@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-ZTL Pilot Passport Challenge
+HCF Pilot Passport Challenge
 @endsection
 
 @push('custom_header')
@@ -9,9 +9,9 @@ ZTL Pilot Passport Challenge
 
 @section('content')
 @if(auth()->guard('realops')->guest())
-@include('inc.header', ['title' => 'ZTL Pilot Passport Challenge', 'type' => 'external', 'content' => '<a href="/pilot_passport/login" class="btn btn-primary float-right" dusk="login">Login as Pilot</a>'])
+@include('inc.header', ['title' => 'HCF Pilot Passport Challenge', 'type' => 'external', 'content' => '<a href="/pilot_passport/login" class="btn btn-primary float-right" dusk="login">Login as Pilot</a>'])
 @else
-@include('inc.header', ['title' => 'ZTL Pilot Passport Challenge', 'type' => 'external', 'content' => '<button disabled class="btn btn-primary float-right">Welcome, ' . auth()->guard('realops')->user()->full_name . '</button>'])
+@include('inc.header', ['title' => 'HCF Pilot Passport Challenge', 'type' => 'external', 'content' => '<button disabled class="btn btn-primary float-right">Welcome, ' . auth()->guard('realops')->user()->full_name . '</button>'])
 @endif
 
 <div class="container">
@@ -44,15 +44,12 @@ ZTL Pilot Passport Challenge
         <div role="tabpanel" class="tab-pane p-2 mb-4{{ $active }}" id="information" dusk="info">
             <div class="row">
                 <div class="col-sm-8">
-                    <h5>What is the ZTL Pilot Passport Challenge?</h5>
+                    <h5>What is the HCF Pilot Passport Challenge?</h5>
                     <p>Are you tired of flying the same routes to the same airports? Do you need a new mission? Are you interested in being more
                         proficient as a pilot? Do you enjoy the service provided by one of the top facilities in VATUSA? Then this challenge is for
-                        you! This is a unique quest for VATSIM pilots to visit airfields within the Atlanta Virtual ARTCC's airspace boundary.
-                        Challenge yourself to visit airfields served by Atlanta Virtual Air Traffic Controllers and build your skills as a pilot by
-                        flying new approaches and taxiing on unfamiliar surfaces. We offer three distinct paths: airline pilot, corporate aviator,
-                        and bug smasher The airline path features airports served by part 121 commercial carriers. The business aviator path
-                        features airports commonly frequented by part 135 operators flying private jets and turboprops. The bug smasher path
-                        features the many smaller airports throughout Georgia, Alabama, South Carolina, North Carolina, and Tennessee.</p>
+                        you! This is a unique quest for VATSIM pilots to visit airfields within the Honolulu Virtual ARTCC's airspace boundary.
+                        Challenge yourself to visit airfields served by Honolulu Virtual Air Traffic Controllers and build your skills as a pilot by
+                        flying new approaches and taxiing on unfamiliar surfaces. We offer three distinct paths: Honolulu's bigger airports, its smaller airports, and Guam.</p>
                 </div>
                 <div class="col-sm-4 text-center">
                     <img src="/photos/pilot_passport/pilot_passport_stamp.png" width="200px" alt="stamp">
@@ -61,7 +58,7 @@ ZTL Pilot Passport Challenge
             <div class="row">
                 <div class="col-sm-6">
                     <h5>What's in it for me?</h5>
-                    <p>Pilots who enroll and meet milestones of the challenge will be recognized on the ZTL website. You'll have the opportunity to
+                    <p>Pilots who enroll and meet milestones of the challenge will be recognized on the HCF website. You'll have the opportunity to
                         fill up a virtual passport book with stamps for each airfield you visit. Upon completion of a path, you’ll get a badge and
                         a certificate of completion suitable for framing.</p>
                 </div>
@@ -76,7 +73,7 @@ ZTL Pilot Passport Challenge
                 <div class="col-sm-12">
                     <h5>Feedback?</h5>
                     <p>Want to tell us what you think about this program? We're always looking for feedback. Send us an email at
-                        <a href="mailto:wm@ztlartcc.org" alt="Email_Us">wm@ztlartcc.org</a> or visit our <a href="/feedback/new" alt="Feedback">
+                        <a href="mailto:hcf-wm@vatusa.net" alt="Email_Us">hcf-wm@vatusa.net</a> or visit our <a href="/feedback/new" alt="Feedback">
                             pilot feedback</a> page.
                     </p>
                 </div>
@@ -214,7 +211,7 @@ ZTL Pilot Passport Challenge
             <div class="row">
                 <div class="col-sm-12">
                     <h5>Privacy Settings</h5>
-                    <p>ZTL understands that some pilots may want to participate in this program but wish to remain anonymous or otherwise protect
+                    <p>HCF understands that some pilots may want to participate in this program but wish to remain anonymous or otherwise protect
                         their privacy. No problem! You may adjust your privacy settings below and we'll respect your wishes.
                     </p>
                 </div>
@@ -229,7 +226,7 @@ ZTL Pilot Passport Challenge
                 </div>
                 <div class="col-sm-10">
                     <p>When you complete an achievement in the program, your First Name and Last Initial (formatted similar to "John D.") will be
-                        shown on ZTL's public-facing website.
+                        shown on HCF's public-facing website.
                     </p>
                 </div>
             </div>
@@ -242,7 +239,7 @@ ZTL Pilot Passport Challenge
                 </div>
                 <div class="col-sm-10">
                     <p>When you complete an achievement in the program, your First Name (formatted similar to "Jane") will be
-                        shown on ZTL's public-facing website.
+                        shown on HCF's public-facing website.
                     </p>
                 </div>
             </div>
@@ -255,7 +252,7 @@ ZTL Pilot Passport Challenge
                 </div>
                 <div class="col-sm-10">
                     <p>When you complete an achievement in the program, your VATSIM CID (formatted similar to "1234567") will be
-                        shown on ZTL's public-facing website.
+                        shown on HCF's public-facing website.
                     </p>
                 </div>
             </div>
@@ -267,7 +264,7 @@ ZTL Pilot Passport Challenge
                     </div>
                 </div>
                 <div class="col-sm-10">
-                    <p>When you complete an achievement in the program, you will not be identified on ZTL's public-facing website. Your achievement
+                    <p>When you complete an achievement in the program, you will not be identified on HCF's public-facing website. Your achievement
                         will still be visible to you protected by your login on this site.</p>
                 </div>
             </div>
@@ -288,7 +285,7 @@ ZTL Pilot Passport Challenge
                     <p>If you need to leave this program and remove all of your personal data from our system (in accordance with protections
                         provided to you by various privacy laws), you may do so by clicking this button. Be advised that this action is
                         irreversible - we have no way of recovering your progress or achievements. If you are currently registered for a
-                        ZTL Realops Event, purging your data here will also remove you from our Realops system. This action has no effect on
+                        HCF Realops Event, purging your data here will also remove you from our Realops system. This action has no effect on
                         your VATSIM account. For VATSIM privacy and data protection options, please visit
                         <a href="https://vatsim.net/docs/policy/data-protection-and-handling-policy" target="_blank" alt="VATSIM_DPHP">VATSIM DPHP</a>.
                     </p>

@@ -13,171 +13,103 @@ class PilotPassportAirfieldMapSeeder extends Seeder {
      */
     public function run() {
         DB::table('pilot_passport_airfield_map')->insert([
-             'airfield' => 'ATL',
+             'airfield' => 'HNL',
              'mapped_to' => 1
          ]);
         DB::table('pilot_passport_airfield_map')->insert([
-           'airfield' => 'CLT',
+           'airfield' => 'JRF',
            'mapped_to' => 1
         ]);
         DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'GSO',
+            'airfield' => 'NGF',
             'mapped_to' => 1
         ]);
         DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'TRI',
+            'airfield' => 'LIH',
             'mapped_to' => 1
         ]);
         DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'TYS',
+            'airfield' => 'BKH',
             'mapped_to' => 1
         ]);
         DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'CHA',
+            'airfield' => 'MKK',
             'mapped_to' => 1
         ]);
         DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'BHM',
+            'airfield' => 'OGG',
             'mapped_to' => 1
         ]);
         DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'MGM',
+            'airfield' => 'KOA',
             'mapped_to' => 1
         ]);
         DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'CSG',
+            'airfield' => 'ITO',
             'mapped_to' => 1
         ]);
         DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'MCN',
-            'mapped_to' => 1
-        ]);
-        DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'AHN',
-            'mapped_to' => 1
-        ]);
-        DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'AGS',
-            'mapped_to' => 1
-        ]);
-        DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'GSP',
-            'mapped_to' => 1
-        ]);
-        DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'JQF',
+            'airfield' => 'GUM',
             'mapped_to' => 2
         ]);
         DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'INT',
+            'airfield' => 'UAM',
             'mapped_to' => 2
         ]);
         DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'PDK',
+            'airfield' => 'ROP',
             'mapped_to' => 2
         ]);
         DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'RYY',
+            'airfield' => 'TIQ',
             'mapped_to' => 2
         ]);
         DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'FTY',
+            'airfield' => 'SPN',
             'mapped_to' => 2
         ]);
         DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'DNL',
-            'mapped_to' => 2
-        ]);
-        DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'GMU',
-            'mapped_to' => 2
-        ]);
-        DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'HKY',
-            'mapped_to' => 2
-        ]);
-        DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'TCL',
-            'mapped_to' => 2
-        ]);
-        DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'AUO',
-            'mapped_to' => 2
-        ]);
-        DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'HMP',
-            'mapped_to' => 2
-        ]);
-        DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'ASN',
-            'mapped_to' => 2
-        ]);
-        DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'CVC',
-            'mapped_to' => 2
-        ]);
-        DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'LGC',
-            'mapped_to' => 2
-        ]);
-        DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'RHP',
+            'airfield' => 'BSF',
             'mapped_to' => 3
         ]);
         DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'DZJ',
+            'airfield' => 'MUE',
             'mapped_to' => 3
         ]);
         DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'GE99',
+            'airfield' => 'UPP',
             'mapped_to' => 3
         ]);
         DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => '14A',
+            'airfield' => 'HNM',
             'mapped_to' => 3
         ]);
         DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'CNI',
+            'airfield' => 'JHM',
             'mapped_to' => 3
         ]);
         DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'PIM',
+            'airfield' => 'LNY',
             'mapped_to' => 3
         ]);
         DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => '06A',
+            'airfield' => 'LUP',
             'mapped_to' => 3
         ]);
         DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'SEM',
+            'airfield' => 'HHI',
             'mapped_to' => 3
         ]);
         DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'VJI',
+            'airfield' => 'HDH',
             'mapped_to' => 3
         ]);
         DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'MKJ',
+            'airfield' => 'HPV',
             'mapped_to' => 3
         ]);
         DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'PXE',
-            'mapped_to' => 3
-        ]);
-        DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'DBN',
-            'mapped_to' => 3
-        ]);
-        DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'ALX',
-            'mapped_to' => 3
-        ]);
-        DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'EUF',
-            'mapped_to' => 3
-        ]);
-        DB::table('pilot_passport_airfield_map')->insert([
-            'airfield' => 'HBI',
+            'airfield' => 'PAK',
             'mapped_to' => 3
         ]);
     }

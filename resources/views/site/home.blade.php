@@ -66,7 +66,7 @@ Home
 					<div class="carousel-item accomplishments">
 						<a href="/pilot_passport" alt="Pilot_Passport_Challenge">
 							<div class="w-100 h-100 rounded bg-dark text-white p-2">
-								<h4>ZTL Pilot Passport Challenge</h4>
+								<h4>HCF Pilot Passport Challenge</h4>
 								<p>&nbsp;&nbsp;&nbsp;Congratulations on achieving these milestones!</p>
 								<ul>
 								@foreach($pilot_accomplishments as $pa)

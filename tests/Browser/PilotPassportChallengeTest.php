@@ -12,13 +12,13 @@ use Tests\DuskTestCase;
 
 class PilotPassportChallengeTest extends DuskTestCase {
 
-    const TEST_AIRPORT_ID = 'GSO';
+    const TEST_AIRPORT_ID = 'ITO';
     const TEST_CHALLENGE_ID = 1;
 
     public function test_home_public(): void {
         $this->browse(function (Browser $browser) {
             $browser->visit('/pilot_passport')
-                    ->assertSee('What is the ZTL Pilot Passport Challenge?');
+                    ->assertSee('What is the HCF Pilot Passport Challenge?');
         });
     }
 
@@ -45,7 +45,7 @@ class PilotPassportChallengeTest extends DuskTestCase {
             $browser->visit('/pilot_passport')
             ->clickLink('Enrollments')
             ->press('@enroll_1')
-            ->assertSee('You are now enrolled in the ZTL Pilot Passport program!');
+            ->assertSee('You are now enrolled in the HCF Pilot Passport program!');
         });
         $enrollment = PilotPassportEnrollment::where('cid', Config::get('vatsim.auth_dev_credential'))->where('challenge_id', 1)->count();
         $this->assertTrue($enrollment > 0);
@@ -74,7 +74,7 @@ class PilotPassportChallengeTest extends DuskTestCase {
         $this->browse(function (Browser $browser) {
             $browser->visit('/pilot_passport')
                     ->clickLink('Settings')
-                    ->assertSee('ZTL understands that some pilots may want to participate');
+                    ->assertSee('HCF understands that some pilots may want to participate');
         });
     }
 
@@ -129,7 +129,7 @@ class PilotPassportChallengeTest extends DuskTestCase {
             $u->id = Config::get('vatsim.auth_dev_credential');
             $u->fname = 'Web';
             $u->lname = 'Two';
-            $u->email = 'wm@ztlartcc.org';
+            $u->email = 'hcf-wm@vatusa.net';
             $u->save();
         }
         $this->clearSamplePilotActivity($u->id);

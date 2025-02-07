@@ -791,7 +791,7 @@ class TrainingDash extends Controller {
             return redirect()->back()->with('error', 'Onboarding must be complete before scheduling a training session. Please refer to the HCF onboarding course on the VATUSA Academy. Contact the TA with questions or concerns.');
         }
 
-        return redirect("https://scheduling.ztlartcc.org?first_name={$user->fname}&last_name={$user->lname}&email={$user->email}&cid={$user->id}");
+        return redirect("https://scheddy.vhcf.net");
     }
 
     private function saveNewTicket(Request $request, $id) {

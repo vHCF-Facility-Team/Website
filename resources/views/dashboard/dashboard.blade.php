@@ -64,10 +64,11 @@ Dashboard
             @endif
         </div>
         <div class="col-sm-3">
-            <a class="btn btn-secondary btn-block" href="https://training.vhcf.net/index.php?name_first={{ Auth::user()->fname }}&name_last={{ Auth::user()->lname }}&email={{ Auth::user()->email }}&cid={{ Auth::id() }}" target="_blank">Schedule a Training Session</a>
+            <a class="btn btn-secondary btn-block" href="https://scheddy.vhcf.net/" target="_blank">Schedule a Training Session</a>
             @if(Auth::user()->isAbleTo('staff'))
                 <a class="btn btn-secondary btn-block" href="http://mail.google.com" target="_blank">Email</a>
             @endif
+            <a class="btn btn-secondary btn-block" href="https://sops.vhcf.net/" target="_blank">SOPs</a>
         </div>
         <div class="col-sm-3">
             <button data-toggle="modal" data-target="#reportBug" class="btn btn-secondary btn-block">Report a Bug</button>
