@@ -54,7 +54,7 @@ class PilotPassportController extends Controller {
             $valid_enrollment = false;
         }
         if (!$valid_enrollment) {
-            return redirect(route('pilotPassportIndex'))->with(['tab' => 'enrollments'])->with('error', 'Enrollment data invalid. Please contact wm@ztlartcc.org for assistance.');
+            return redirect(route('pilotPassportIndex'))->with(['tab' => 'enrollments'])->with('error', 'Enrollment data invalid. Please contact hcf-wm@vatusa.net for assistance.');
         }
         $enrollment = PilotPassportEnrollment::where('cid', $pilot->id)->where('challenge_id', $request->challenge_id)->get();
         if ($enrollment->isEmpty()) {
@@ -63,7 +63,7 @@ class PilotPassportController extends Controller {
             $enrollment->challenge_id = $challenge->id;
             $enrollment->save();
             Mail::to($pilot->email)->send(new PilotPassportMail('enroll', $pilot, $challenge));
-            return redirect(route('pilotPassportIndex'))->with(['tab' => 'enrollments'])->with('success', 'You are now enrolled in the ZTL Pilot Passport program!');
+            return redirect(route('pilotPassportIndex'))->with(['tab' => 'enrollments'])->with('success', 'You are now enrolled in the HCF Pilot Passport program!');
         }
         return redirect(route('pilotPassportIndex'))->with(['tab' => 'enrollments'])->with('error', 'You are already enrolled in this challenge.');
     }
@@ -114,7 +114,7 @@ class PilotPassportController extends Controller {
 
     public function generateCertificate($id) {
         $award = PilotPassportAward::find($id);
-        $error_html = '<p>An error has occured - please contact <a href="emailto:wm@ztlartcc.org">wm@ztlartcc.org</a></p>';
+        $error_html = '<p>An error has occured - please contact <a href="emailto:hcf-wm@vatusa.net">hcf-wm@vatusa.net</a></p>';
         if (!$award) {
             return pdf()->html($error_html)->download();
         }
@@ -137,7 +137,7 @@ class PilotPassportController extends Controller {
             'atm_name' => $atm->full_name
         ];
         $pdf = Pdf::loadView('pdf.pilot_passport_certificate', $params)->setPaper('letter', 'landscape');
-        return $pdf->download('ztl_pilot_passport_challenge_' . $award->challenge_id . '.pdf');
+        return $pdf->download('hcf_pilot_passport_challenge_' . $award->challenge_id . '.pdf');
     }
 
     public function generateStamp($id) {

@@ -15,9 +15,9 @@ class PilotPassportMail extends Mailable implements ShouldQueue {
     use Queueable, SerializesModels;
 
     private static $SUBJECTS = [
-        'enroll' => 'ZTL Pilot Passport Program Enrollment',
-        'visited_airfield' => 'ZTL Pilot Passport - Visit Recorded',
-        'phase_complete' => 'ZTL Pilot Passport - Phase Complete!'
+        'enroll' => 'HCF Pilot Passport Program Enrollment',
+        'visited_airfield' => 'HCF Pilot Passport - Visit Recorded',
+        'phase_complete' => 'HCF Pilot Passport - Phase Complete!'
     ];
 
     /**
@@ -31,9 +31,9 @@ class PilotPassportMail extends Mailable implements ShouldQueue {
      */
     public function envelope(): Envelope {
         return new Envelope(
-            from: new ZTLAddress('events', 'vZTL ARTCC Events Department'),
+            from: new ZTLAddress('events', 'vHCF ARTCC Events Department'),
             replyTo: [
-                new Address('wm@ztlartcc.org', 'vZTL ARTCC WM')
+                new Address('hcf-wm@vatusa.net', 'vHCF ARTCC WM')
             ],
             subject: $this::$SUBJECTS[$this->type]
         );

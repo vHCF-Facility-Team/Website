@@ -17,7 +17,7 @@
             <h2>{{ $pilot_name }}</h2>
             <h4>Has Hereby Completed the {{ $phase_title }} Challenge</h4>
             <h6>of the</h6>
-            <h4>ZTL Pilot Passport Program</h4>
+            <h4>HCF Pilot Passport Program</h4>
             <h6>On this {{ $award_date->format('jS') }} day of {{ $award_date->format('F') }} of the year {{ $award_date->year }}</h6>
         </div>
         <div class="medal-block">
@@ -30,7 +30,7 @@
                 <br>
                 Air Traffic Manager
                 <br>
-                Atlanta Virtual ARTCC
+                Honolulu Virtual ARTCC
             </span>
         </div>
     </body>

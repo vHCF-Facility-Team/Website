@@ -33,6 +33,7 @@
                             <a class="dropdown-item" href="http://www.flightaware.com/statistics/ifr-route/" target="_blank">IFR Routes</a>
                             <a class="dropdown-item" href="/pilots/guide/hnl">HNL Pilot Guide</a>
                             <a class="dropdown-item" href="/ramp-status/hnl">HNL Gate Status</a>
+                            <a class="dropdown-item" href="/pilot_passport">Pilot Passport Challenge</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
