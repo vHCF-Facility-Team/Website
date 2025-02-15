@@ -246,7 +246,7 @@ Update Controller
                     </div>
                     <div class="col-sm-6">
                         <label for="hnl_app">Honolulu Approach</label>
-                        {{ html()->select('hnl_app', $user->uncertified_certified_hcf, $user->hnl_app)->class(['form-control'])->attributes([$hnl_app_disable]) }}
+                        {{ html()->select('hnl_app', $user->uncertified_certified, $user->hnl_app)->class(['form-control'])->attributes([$hnl_app_disable]) }}
                     </div>
                 </div>
             </div>
