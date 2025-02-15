@@ -77,13 +77,13 @@ class LaratrustSeeder extends Seeder {
         // Adds Permissions to the Permissions Table
         DB::table('permissions')->insert([
              'name' => 'snrStaff',
-             'display_name' => 'ATM, DATM, TA, ATA, WM, AWM, FE',
+             'display_name' => 'ATM, DATM, TA, ATA, WM, AWM',
              'description' => ''
         ]);
         DB::table('permissions')->insert([
              'name' => 'staff',
              'display_name' => 'Staff',
-             'description' => 'snrStaff + EC, AEC, AFE'
+             'description' => 'snrStaff + EC, AEC, FE, AFE'
         ]);
         DB::table('permissions')->insert([
              'name' => 'ins',

@@ -18,7 +18,7 @@ Files
     @endif
     @php
         $fileCategories = array('vATIS', 'SOP', 'LOA', 'Training', 'Euroscope', 'Staff');
-        $restricted = array('Staff'=>'staff', 'Training'=>'train', 'Euroscope'=>'roster');
+        $restricted = array('Staff'=>'staff', 'Training'=>'train');
         $displayedTabs = array();
     @endphp 
     <ul class="nav nav-tabs nav-justified" role="tablist">
