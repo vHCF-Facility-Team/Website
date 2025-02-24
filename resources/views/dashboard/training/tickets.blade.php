@@ -85,26 +85,26 @@ Training Tickets
                 @php ($active = '')
                 @if ($loop->first || (!$drafts && $loop->iteration == 2))
                     @php ($active = ' active')
-               @endif
+                @endif
                 <div role="tabpanel" class="tab-pane{{ $active }}" id="{{ $trainingCategory }}">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">View</th>
-                                <th scope="col">Training Date</th>
-                                <th scope="col">Trainer Name</th>
-                                <th scope="col">Position</th>
-                                <th scope="col">Session Type</th>
-                                <th scope="col">Session ID</th>
-                                <th scope="col">Start Time</th>
-                                <th scope="col">End Time</th>
-                                <th scope="col">Score<br>(1-5)</th>
-                                <th scope="col">Movements</th>
-                                <th scope="col">INS/MTR Comments</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @if($tickets->count() > 0)
+                    @if($tickets->count() > 0)
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">View</th>
+                                    <th scope="col">Training Date</th>
+                                    <th scope="col">Trainer Name</th>
+                                    <th scope="col">Position</th>
+                                    <th scope="col">Session Type</th>
+                                    <th scope="col">Session ID</th>
+                                    <th scope="col">Start Time</th>
+                                    <th scope="col">End Time</th>
+                                    <th scope="col">Score<br>(1-5)</th>
+                                    <th scope="col">Movements</th>
+                                    <th scope="col">INS/MTR Comments</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                             @foreach($tickets as $t)
                                 @if($t->sort_category == $trainingCategory)
                                     @if($t->cert) {{-- student certified: green highlight --}}
@@ -136,13 +136,11 @@ Training Tickets
                                 </tr>
                                 @endif
                             @endforeach
-                        @else
-                            <tr>
-                                <td colspan="6">No training tickets found.</td>
-                            </tr>
-                        @endif
                         </tbody>
                     </table>
+                    @else
+                        @include('inc.empty_state', ['header' => 'No Training Tickets', 'body' => 'There are no training tickets for this controller under this category', 'icon' => 'fa-solid fa-file'])
+                    @endif
                 </div>
             @endforeach
         </div>
@@ -176,6 +174,9 @@ Training Tickets
                 @endforeach
             </tbody>
         </table>
+    @else
+        <br />
+        @include('inc.empty_state', ['header' => 'No Open Drafts', 'body' => 'There are no open training ticket drafts to show here.', 'icon' => 'fa-solid fa-file'])
     @endif
 </div>
 @endsection
