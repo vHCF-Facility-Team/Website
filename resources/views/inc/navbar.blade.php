@@ -42,6 +42,7 @@
                             <a class="dropdown-item" href="/controllers/roster">Roster</a>
                             <a class="dropdown-item" href="/controllers/staff">Staff</a>
                             <a class="dropdown-item" href="/controllers/files">Files</a>
+                            <a class="dropdown-item" href="https://sops.vhcf.net/" target="_blank">SOPs</a>
                             <a class="dropdown-item" href="/controllers/stats">Controller Stats</a>
                         </div>
                     </li>
