@@ -334,7 +334,7 @@ class FrontController extends Controller {
             }
         }
         
-        if ($request->rating != 4) {
+        if ($request->rating >= 4) {
             $expireDate = new DateTime($request->updated_at);
             $expireDate->modify('+ 90 days');
             if (date_create() > $expireDate) {
