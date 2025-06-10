@@ -103,6 +103,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
         Route::get('/scenery', 'ControllerDash@sceneryIndex');
         Route::get('/scenery/view/{id}', 'ControllerDash@showScenery');
         Route::post('/scenery/search', 'ControllerDash@searchScenery');
+        Route::get('/merch', 'MerchStore@viewStore');
         Route::post('/search-airport', 'ControllerDash@searchAirport')->name('searchAirport');
         Route::get('/search-airport/search', 'ControllerDash@searchAirportResult');
         Route::post('/report-bug', 'ControllerDash@reportBug')->name('reportBug');
@@ -127,6 +128,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
         Route::get('atcast', 'TrainingDash@showatcast');
         Route::get('/req', 'TrainingDash@ShowReq');
         Route::get('/schedule', 'TrainingDash@handleSchedule');
+        Route::post('/upload-image', 'TrainingDash@imageUpload')->name('imageUpload');
         Route::prefix('tickets')->middleware('permission:train')->group(function () {
             Route::get('/', 'TrainingDash@ticketsIndex');
             Route::post('/search', 'TrainingDash@searchTickets');
@@ -160,7 +162,6 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
             });
         });
         Route::get('/statistics', 'TrainingDash@statistics')->middleware('permission:snrStaff')->name('statistics');
-        Route::get('/statistics/graph', 'TrainingDash@generateGraphs')->middleware('permission:snrStaff');
     });
 
     Route::prefix('admin')->group(function () {
@@ -189,6 +190,15 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
             Route::get('/edit/{id}', 'AdminDash@editScenery');
             Route::post('/edit/{id}/save', 'AdminDash@saveScenery')->name('saveScenery');
             Route::delete('/delete/{id}', 'AdminDash@deleteScenery')->name('deleteScenery');
+        });
+        Route::prefix('store')->middleware('permission:staff|permission:contributor')->group(function () {
+            Route::get('/', 'MerchStore@adminStore');
+            Route::get('/view/{id}', 'MerchStore@viewItem');
+            Route::get('/new', 'MerchStore@newItem');
+            Route::post('/new', 'MerchStore@saveItem')->name('saveNewStoreItem');
+            Route::get('/edit/{id}', 'MerchStore@editItem')->name('editStoreItem');
+            Route::post('/edit/{id}/save', 'MerchStore@saveItem')->name('saveStoreItem');
+            Route::get('/delete/{id}', 'MerchStore@deleteItem')->name('deleteStoreItem');
         });
         Route::prefix('files')->middleware('permission:files')->group(function () {
             Route::get('/upload', 'AdminDash@uploadFile');

@@ -18,9 +18,7 @@ use Carbon\Carbon;
 use Config;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 use Mail;
-use mitoteam\jpgraph\MtJpGraph;
 
 class TrainingDash extends Controller {
     public static $GRAPH_SESSIONS_PER_MONTH = 1;
@@ -237,6 +235,30 @@ class TrainingDash extends Controller {
         } else {
             return redirect()->back()->with('error', 'There is no controller that exists with that CID.');
         }
+    }
+
+    public function imageUpload(Request $request) {
+        if ($request->hasFile('upload')) {
+            $originName = $request->file('upload')->getClientOriginalName();
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+            $ext = $request->file('upload')->getClientOriginalExtension();
+            $fileName = $fileName . '_' . time() . '.' . $ext;
+
+            $request->file('upload')->storeAs('public/ticket_images', $fileName);
+
+            $public_url = config('app.url') . '/storage/ticket_images/' . $fileName;
+
+            return response()->json([
+                'fileName' => $fileName,
+                'uploaded' => 1,
+                'url' => $public_url
+            ]);
+        }
+
+        return response()->json([
+            'uploaded' => 0,
+            'error' => ['message' => 'No file uploaded.']
+        ], 400);
     }
 
     public function newTrainingTicket(Request $request) {
@@ -507,15 +529,8 @@ class TrainingDash extends Controller {
         }
     }
 
-    public function statistics(Request $request) {
-        $yearSel = $monthSel = null;
-        if (isset($request->date_select)) {
-            $datePart = explode(' ', $request->date_select); // Format: MM YYYY
-            $monthSel = $datePart[0];
-            $yearSel = $datePart[1];
-        }
-        $stats = $this->generateTrainingStats($yearSel, $monthSel, 'stats');
-        return view('dashboard.training.statistics')->with('stats', $stats);
+    public function statistics() {
+        return view('dashboard.training.statistics');
     }
 
     public static function generateTrainingStats($year, $month, $dataType) {
@@ -586,6 +601,22 @@ class TrainingDash extends Controller {
         $retArr['totalInstructors'] = $ins;
         $retArr['totalMentors'] = $mtr;
         $retArr['trainerSessions'] = $trainerSessions;
+        // Find top trainers
+        $top_trainers = $trainer_by_total = $trainer_by_cid = [];
+        foreach ($retArr['trainerSessions'] as $t) {
+            $trainer_by_total[$t['cid']] = $t['total'];
+            $trainer_by_cid[$t['cid']] = $t['name'];
+        }
+        arsort($trainer_by_total);
+        foreach ($trainer_by_total as $trainer_cid => $tt) {
+            if ($tt == 0) {
+                break;
+            }
+            $top_trainers[] = (object)['name' => $trainer_by_cid[$trainer_cid], 'sessions_given' => $tt];
+            if (count($top_trainers) == 3) {
+                break;
+            }
+        }
         // Students requiring training
         if ($dataType == 'graph') {
             $students = User::where('status', '1')->where('visitor', '0')->where('canTrain', '1')->where('rating_id', '<', '5')->get();
@@ -646,97 +677,18 @@ class TrainingDash extends Controller {
                 }
             }
             $retArr['taMonthlyReport'] = "In the Month of " . Carbon::createFromDate($retArr['date']['start_date'])->format('F') . ", HCF has offered " . $retArr['sessionsPerMonth'] . " training sessions (" . $percentSessionsChange . "% change from " . Carbon::createFromDate($retArr['date']['start_date'])->subMonths(1)->format('F') . "). " . $retArr['sessionsCompletePerMonth'] . " sessions were completed (" . $percentSessionsCompleteChange . "%), with " . $retArr['sessionsPerMonthNoShow'] . " known no-shows. " . $trainingStaffBelowMins . " Training Staff members did not meet monthly minimums.";
+            if (count($top_trainers) > 0) {
+                $retArr['taMonthlyReport'] .= "Our TOP trainers for the month of " . Carbon::createFromDate($retArr['date']['start_date'])->format('F') . " were:";
+                foreach ($top_trainers as $ind => $top_trainer) {
+                    $order_no = $ind + 1;
+                    if ($ind > 0) {
+                        $retArr['taMonthlyReport'] .= "|";
+                    }
+                    $retArr['taMonthlyReport'] .= " " . $order_no . ". " . $top_trainer->name;
+                }
+            }
         }
         return $retArr;
-    }
-
-    public function generateGraphs(Request $request) {
-        $graphId = $request->id;
-        $statArr = TrainingDash::generateTrainingStats($request->year, $request->month, 'graph');
-        // Reformat date range
-        $from = Carbon::createFromDate($statArr['date']['start_date'])->format('m/j/Y');
-        $to = Carbon::createFromDate($statArr['date']['end_date'])->format('m/j/Y');
-        MtJpGraph::load(['bar', 'plotline']);
-        $graph = new \Graph(600, 600);
-        $graph->SetFrame(false, 'black', 0);
-        $graph->SetScale("textlin");
-        // Graph configuration
-        $statsGraphs = [
-            1 => ['title' => 'Sessions Per Month', 'subtitle' => '(' . $from . ' - ' . $to . ')', 'x-title' => 'Session Type', 'y-title' => 'Number of Sessions', 'dataset' => 'sessionsByType'],
-            2 => ['title' => 'Sessions Per Month By Instructor/Mentor', 'subtitle' => '(' . $from . ' - ' . $to . ')', 'x-title' => '', 'y-title' => 'Number of Sessions', 'dataset' => null],
-            3 => ['title' => 'Average Session Duration', 'subtitle' => 'Last Six Months', 'x-title' => '', 'y-title' => 'Average Session Duration (minutes)', 'dataset' => 'sessionDuration'],
-            4 => ['title' => 'Students Requiring Training', 'subtitle' => 'As of ' . Carbon::now()->format('m/d/Y'), 'x-title' => 'Student Type', 'y-title' => 'Number of Students', 'dataset' => 'studentsRequireTng']
-        ];
-        $graph->title->Set($statsGraphs[$graphId]['title']);
-        $graph->subtitle->Set($statsGraphs[$graphId]['subtitle']);
-        $graph->xaxis->SetTitle($statsGraphs[$graphId]['x-title'], 'center');
-        $graph->yaxis->SetTitle($statsGraphs[$graphId]['y-title'], 'middle');
-        $graph->title->SetFont(FF_FONT1, FS_BOLD);
-        $graph->yaxis->title->SetFont(FF_FONT1, FS_BOLD);
-        $graph->xaxis->title->SetFont(FF_FONT1, FS_BOLD);
-
-        $noData = new \Text('No Data Available');
-        $noData->SetPos(0.5, 0.5, 'center', 'center');
-        $noData->SetParagraphAlign('center');
-        $noData->SetColor('black');
-        $noData->SetFont(FF_FONT1, FS_BOLD);
-        $noData->SetBox();
-
-        if (in_array($graphId, [TrainingDash::$GRAPH_SESSIONS_PER_MONTH, TrainingDash::$GRAPH_STUDENT_TRAINING_PER_RATING])) {
-            $bplot = new \BarPlot(array_values($statArr[$statsGraphs[$graphId]['dataset']]));
-            $graph->Add($bplot);
-            $graph->xaxis->SetTickLabels(array_keys($statArr[$statsGraphs[$graphId]['dataset']]));
-        } elseif ($graphId == TrainingDash::$GRAPH_SESSIONS_BY_INSTRUCTOR) {
-            if (count($statArr['trainerSessions']) == 0) {
-                $statArr['trainerSessions'][] = ['name'=>'','S1'=>0,'S2'=>0,'S3'=>0,'C1'=>0,'Other'=>0,'total'=>0];
-                $graph->AddText($noData);
-            }
-            $instructors = $plotArray = [];
-            $instructionalCategories = ['S1', 'S2', 'S3', 'C1', 'Other'];
-            foreach ($statArr['trainerSessions'] as $instructor) {
-                $instructors[] = $instructor['name'];
-                foreach ($instructionalCategories as $instructionalCategory) {
-                    $$instructionalCategory[] = $instructor[$instructionalCategory];
-                }
-            }
-            foreach ($instructionalCategories as $instructionalCategory) {
-                $plotArray[] = new \BarPlot($$instructionalCategory);
-                end($plotArray)->SetLegend($instructionalCategory);
-            }
-            $gbPlot = new \AccBarPlot($plotArray);
-            $graph->Add($gbPlot);
-            $line = new \PlotLine(HORIZONTAL, Config::get('hcf.trainer_min_sessions'), 'red', 1);
-            $graph->AddLine($line);
-            $graph->legend->SetColumns(5);
-            $graph->legend->Pos(0.5, 0.1, "center", "top");
-            $graph->xaxis->SetTickLabels($instructors);
-            $graph->xaxis->SetLabelAngle(50);
-        } elseif ($graphId == TrainingDash::$GRAPH_SESSION_AVERAGE_DURATION) {
-            if (count($statArr['sessionDuration']) == 0) {
-                $statArr['sessionDuration'][] = ['', 0];
-                $graph->AddText($noData);
-            }
-            // Create the bar plots
-            $sessionAvgTime = $sessionId = [];
-            foreach ($statArr['sessionDuration'] as $seshType) {
-                $sIdExp = explode(' ', $seshType[0]);
-                if ($sIdExp[0] == 'Unlisted/other') {
-                    $sessionId[] = 'Other';
-                } else {
-                    $sessionId[] = $sIdExp[0];
-                }
-                $sessionAvgTime[] = $seshType[1];
-            }
-            array_multisort($sessionId, $sessionAvgTime);
-            $bPlot = new \BarPlot($sessionAvgTime);
-            $graph->Add($bPlot);
-            $graph->xaxis->SetTickLabels($sessionId);
-            $graph->xaxis->SetLabelAngle(50);
-        }
-
-        $response = Response::make($graph->Stroke());
-        $response->header('Content-type', 'image/png');
-        return $response;
     }
 
     public function newTrainerFeedback() {
