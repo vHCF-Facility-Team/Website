@@ -460,6 +460,9 @@ class TrainingDash extends Controller {
     public function getTicketSortCategory($position, $draft) {
         $position_types_by_rating = TrainingTicket::$position_types_by_rating;
         switch (true) {
+            case ($draft):
+                return 'drafts';
+                break;
             case ($position > 6 && $position < 22): // Legacy types
                 return 's1';
                 break;

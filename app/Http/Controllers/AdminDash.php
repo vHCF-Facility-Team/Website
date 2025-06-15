@@ -396,14 +396,14 @@ class AdminDash extends Controller {
             }
         }
         if (Auth::user()->isAbleTo('roster') || Auth::user()->isAbleTo('train')) { // Update training certifications
-            $positions = ['gnd','hnl_del','hnl_gnd','hnl_twr','hnl_app','twr_solo_fields'];
+            $positions = ['gnd','ogg_del','ogg_gnd','ogg_app','hnl_del','hnl_gnd','hnl_twr','hnl_app','twr_solo_fields'];
             foreach ($positions as $position) {
                 $user[$position] = ($request->input($position)) ? $request->input($position) : $user[$position];
             }
             $positions = ['twr','app','ctr'];
             $solo_facilities = [ // Facilities submitted to VATUSA for solo certs
-                'twr' => 'HNL',
-                'app' => 'HNL',
+                'twr' => 'OGG',
+                'app' => 'OGG',
                 'ctr' => 'HNL'];
             foreach ($positions as $solo_id => $position) {
                 if ($user[$position] == $user->getMagicNumber('SOLO_CERTIFICATION')) {

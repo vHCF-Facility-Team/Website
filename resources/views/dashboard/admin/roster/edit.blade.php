@@ -168,7 +168,7 @@ Update Controller
         </div>
         <div role="tabpanel" class="tab-pane" id="certifications">
             <br>
-            <h6><span class="badge badge-warning text-light">New!</span>&nbsp;This control now complies with GCAP requirements.<br>Please review the latest version of HCF 3120.4 prior to updating a controller's certifications.</h6>
+            <h6><span class="badge badge-warning text-light">New!</span>&nbsp;This control now complies with GCAP requirements.<br>Please review the latest version of HCF 3120.1 and 3120.2 prior to updating a controller's certifications.</h6>
             <div class="form-group">
                 <div class="row">
                     <div class="col-sm-6">
@@ -233,7 +233,7 @@ Update Controller
                         {{ html()->select('hnl_del', $user->uncertified_certified, $user->hnl_del)->class(['form-control'])->attributes([$hnl_disable]) }}
                     </div>
                     <div class="col-sm-6">
-                        <label for="atl_gnd">Honolulu Ground</label>
+                        <label for="hnl_gnd">Honolulu Ground</label>
                         {{ html()->select('hnl_gnd', $user->uncertified_certified, $user->hnl_gnd)->class(['form-control'])->attributes([$hnl_disable]) }}
                     </div>
                 </div>
