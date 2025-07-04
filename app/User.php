@@ -236,9 +236,9 @@ class User extends Authenticatable implements LaratrustUser {
     protected const SOLO_CERT_DURATION = 30; // Duration of solo certs in days
 
     public static $SoloFacilities = [ // Facilities submitted to VATUSA for solo certs
-                'twr' => 'BHM',
-                'app' => 'BHM',
-                'ctr' => 'ZTL'
+                'twr' => 'OGG',
+                'app' => 'OGG',
+                'ctr' => 'HCF'
     ];
 
     public static function soloPositions(): array {

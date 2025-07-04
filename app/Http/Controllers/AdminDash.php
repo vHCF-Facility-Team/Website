@@ -268,23 +268,19 @@ class AdminDash extends Controller {
         }
         if ($user->del == 2) {
             $user->del = 1;
-            $user->clt_del = 1;
-            $user->atl_del = 1;
+            $user->hnl_del = 1;
         }
         if ($user->gnd == 2) {
             $user->gnd = 1;
-            $user->clt_gnd = 1;
-            $user->atl_gnd = 1;
+            $user->hnl_gnd = 1;
         }
         if ($user->twr == 2) {
             $user->twr = 1;
-            $user->clt_twr = 1;
-            $user->atl_twr = 1;
+            $user->hnl_twr = 1;
         }
         if ($user->app == 2) {
             $user->app = 1;
-            $user->clt_app = 1;
-            $user->atl_app = 1;
+            $user->hnl_app = 1;
         }
 
         $user_events = [];
