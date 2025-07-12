@@ -348,11 +348,11 @@ class TrainingDash extends Controller {
         $ticket->student_comments = $request->student_comments;
         $ticket->save();
 
-        $mailer = Mail::to('ta@ztlartcc.org');
+        $mailer = Mail::to('hcf-ta@vatusa.net');
         $trainer = User::find($ticket->trainer_id);
         if ($trainer) {
             if ($trainer->user_status[$trainer->status] == 'Active' && $trainer->isAbleTo('train')) {
-                $mailer = Mail::to($trainer->email)->cc('training@ztlartcc.org');
+                $mailer = Mail::to($trainer->email)->cc('hcf-training@vatusa.net');
             }
         }
         $mailer->send(new StudentComment($trainer->full_name, $ticket->id));
