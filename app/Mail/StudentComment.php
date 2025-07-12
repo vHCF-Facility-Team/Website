@@ -24,7 +24,7 @@ class StudentComment extends Mailable implements ShouldQueue {
      */
     public function envelope(): Envelope {
         return new Envelope(
-            from: new ZTLAddress('feedback', 'vZTL ARTCC Training Department'),
+            from: new ZTLAddress('feedback', 'vHCF ARTCC Training Department'),
             subject: 'You Have a New Student Comment!',
         );
     }
