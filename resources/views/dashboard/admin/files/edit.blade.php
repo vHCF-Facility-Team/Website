@@ -25,7 +25,7 @@ Upload File
                         6 => 'Staff',
                         7 => 'Training',
                         8 => 'Euroscope'
-                    ], $file->type)->class(['form-control']) }}
+                    ], $file->type)->class(['form-select']) }}
                 </div>
             </div>
         </div>
@@ -39,7 +39,7 @@ Upload File
                 {{ html()->text('permalink', $file->permalink)->class(['form-control'])->placeholder('Optional, no spaces') }}
             </div>
         @endif
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-sm-1">
                 <button class="btn btn-success" action="submit">Save</button>
             </div>

@@ -5,7 +5,7 @@ Roster
 @endsection
 
 @push('custom_header')
-<link rel="stylesheet" href="{{ mix('css/roster.css') }}" />
+@vite('resources/assets/sass/roster.scss')
 @endpush
 
 @section('content')
@@ -15,17 +15,17 @@ Roster
     @if(Auth::user()->isAbleTo('roster'))
     <a href="/dashboard/admin/roster/visit/requests" class="btn btn-warning">Visit Requests</a>
     <a href="/dashboard/admin/roster/purge-assistant" class="btn btn-danger">Roster Purge Assistant</a>
-    <span data-toggle="modal" data-target="#allowVisitor">
+    <span data-bs-toggle="modal" data-bs-target="#allowVisitor">
         <button type="button" class="btn btn-warning">Allow Rejected Visitor</button>
     </span>
     <br><br>
     @endif
     <ul class="nav nav-tabs nav-justified" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" href="#hcontrollers" role="tab" data-toggle="tab" style="color:black"><i class="fas fa-home"></i>&nbsp;Home Controllers</a>
+            <a class="nav-link active" href="#hcontrollers" role="tab" data-bs-toggle="tab" style="color:black"><i class="fas fa-home"></i>&nbsp;Home Controllers</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#vcontrollers" role="tab" data-toggle="tab" style="color:black"><i class="fas fa-suitcase"></i>&nbsp;Visiting Controllers</a>
+            <a class="nav-link" href="#vcontrollers" role="tab" data-bs-toggle="tab" style="color:black"><i class="fas fa-suitcase"></i>&nbsp;Visiting Controllers</a>
         </li>
     </ul>
     @php
@@ -55,29 +55,29 @@ Roster
                         <tr>
                             <td>
                                 @if($c->hasRole('atm'))
-                                <span class="badge badge-danger">ATM</span>
+                                <span class="badge bg-danger">ATM</span>
                                 @elseif($c->hasRole('datm'))
-                                <span class="badge badge-danger">DATM</span>
+                                <span class="badge bg-danger">DATM</span>
                                 @elseif($c->hasRole('ta'))
-                                <span class="badge badge-danger">TA</span>
+                                <span class="badge bg-danger">TA</span>
                                 @elseif($c->hasRole('wm'))
-                                <span class="badge badge-primary">WM</span>
+                                <span class="badge bg-primary">WM</span>
                                 @elseif($c->hasRole('awm'))
-                                <span class="badge badge-primary">AWM</span>
+                                <span class="badge bg-primary">AWM</span>
                                 @elseif($c->hasRole('ec'))
-                                <span class="badge badge-primary">EC</span>
+                                <span class="badge bg-primary">EC</span>
                                 @elseif($c->hasRole('aec'))
-                                <span class="badge badge-primary">AEC</span>
+                                <span class="badge bg-primary">AEC</span>
                                 @elseif($c->hasRole('aec-ghost')&&(Auth::user()->isAbleTo('roster') || Auth::user()->isAbleTo('train') || Auth::user()->isAbleTo('events')))
-                                <span class="badge badge-primary">AEC-Ghost</span>
+                                <span class="badge bg-primary">AEC-Ghost</span>
                                 @elseif($c->hasRole('fe'))
-                                <span class="badge badge-primary">FE</span>
+                                <span class="badge bg-primary">FE</span>
                                 @elseif($c->hasRole('afe'))
-                                <span class="badge badge-primary">AFE</span>
+                                <span class="badge bg-primary">AFE</span>
                                 @elseif($c->hasRole('ins'))
-                                <span class="badge badge-info">INS</span>
+                                <span class="badge bg-info">INS</span>
                                 @elseif($c->hasRole('mtr'))
-                                <span class="badge badge-info">MTR</span>
+                                <span class="badge bg-info">MTR</span>
                                 @endif
                                 @if(Auth::user()->isAbleTo('roster') || Auth::user()->isAbleTo('train') || Auth::user()->isAbleTo('events'))
                                 <a href="/dashboard/admin/roster/edit/{{ $c->id }}">{{ $c->backwards_name }}</a>
@@ -85,10 +85,10 @@ Roster
                                 {{ $c->backwards_name }}
                                 @endif
                                 @if($c->hasRole('events-team')&&(Auth::user()->isAbleTo('roster') || Auth::user()->isAbleTo('train') || Auth::user()->isAbleTo('events')))
-                                <span class="badge badge-warning text-light">Events Team</span>
+                                <span class="badge bg-warning text-light">Events Team</span>
                                 @endif
                                 @if($c->hasRole('marketing')&&(Auth::user()->isAbleTo('roster')))
-                                <span class="badge badge-secondary text-light">Marketing</span>
+                                <span class="badge bg-secondary text-light">Marketing</span>
                                 @endif
                             </td>
                             <td class="text-center">{{$c->initials}}</td>
@@ -97,18 +97,18 @@ Roster
                             <!-- Unrestricted -->
                             <td class="text-center">
                                 @if($c->gnd > $c->getMagicNumber('UNCERTIFIED'))
-                                <span class="badge badge-primary">DEL</span>
-                                <span class="badge badge-success">GND</span>
+                                <span class="badge bg-primary">DEL</span>
+                                <span class="badge bg-success">GND</span>
                                 @endif
                                 @if($c->twr === $c->getMagicNumber('SOLO_CERTIFICATION'))
-                                <span class="badge badge-warning text-light" data-toggle="tooltip" data-html="true" title="Cert Expires: {{ $c->solo }}<br>{{$c->twr_solo_fields}}">TWR-SOLO</span>
+                                <span class="badge bg-warning text-light" data-bs-toggle="tooltip" data-bs-html="true" title="Cert Expires: {{ $c->solo }}<br>{{$c->twr_solo_fields}}">TWR-SOLO</span>
                                 @elseif($c->twr > $c->getMagicNumber('UNCERTIFIED'))
-                                <span class="badge badge-danger">TWR</span>
+                                <span class="badge bg-danger">TWR</span>
                                 @endif
                                 @if($c->app === $c->getMagicNumber('SOLO_CERTIFICATION'))
-                                <span class="badge badge-warning text-light" data-toggle="tooltip" data-html="true" title="Cert Expires: {{ $c->solo }}<br>{{$c->twr_solo_fields}}">APP-SOLO</span>
+                                <span class="badge bg-warning text-light" data-bs-toggle="tooltip" data-bs-html="true" title="Cert Expires: {{ $c->solo }}<br>{{$c->twr_solo_fields}}">APP-SOLO</span>
                                 @elseif($c->app > $c->getMagicNumber('UNCERTIFIED'))
-                                <span class="badge badge-info">APP</span>
+                                <span class="badge bg-info">APP</span>
                                 @endif
                             </td>
                             <!-- HNL Tier 2 -->
@@ -118,24 +118,25 @@ Roster
                             ?>
                             <td class="text-center">
                                 @if(($c->hnl_del > $c->getMagicNumber('UNCERTIFIED'))||($c->del === $c->getMagicNumber('LEGACY_MAJOR_CERTIFIED')))
-                                <span class="badge badge-primary">DEL</span>
+                                <span class="badge bg-primary">DEL</span>
                                 @endif
                                 @if(($c->hnl_gnd > $c->getMagicNumber('UNCERTIFIED'))||($c->gnd === $c->getMagicNumber('LEGACY_MAJOR_CERTIFIED')))
-                                <span class="badge badge-success">GND</span>
+                                <span class="badge bg-success">GND</span>
                                 @endif
                                 @if(($c->hnl_twr > $c->getMagicNumber('UNCERTIFIED'))||($c->twr === $c->getMagicNumber('LEGACY_MAJOR_CERTIFIED')))
-                                <span class="badge badge-danger">TWR</span>
+                                <span class="badge bg-danger">TWR</span>
                                 @endif
                                 @if(($c->hnl_app > $c->getMagicNumber('UNCERTIFIED'))||($c->app === $c->getMagicNumber('LEGACY_MAJOR_CERTIFIED')))
-                                <span class="badge badge-info">APP</span>
+                                <span class="badge bg-info">APP</span>
                                 @endif
                             </td>
+                            
                             <!-- Enroute -->
                             <td class="text-center">
                                 @if($c->ctr === $c->getMagicNumber('SOLO_CERTIFICATION'))
-                                <span class="badge badge-warning text-light" data-toggle="tooltip" data-html="true" title="Cert Expires: {{ $c->solo }}<br>{{$c->twr_solo_fields}}">HCF-SOLO</span>
+                                <span class="badge bg-warning text-light" data-bs-toggle="tooltip" data-bs-html="true" title="Cert Expires: {{ $c->solo }}<br>{{$c->twr_solo_fields}}">HCF-SOLO</span>
                                 @elseif($c->ctr > $c->getMagicNumber('UNCERTIFIED'))
-                                <span class="badge badge-secondary">HCF</span>
+                                <span class="badge bg-secondary">HCF</span>
                                 @endif
                             </td>
                         </tr>
@@ -151,9 +152,7 @@ Roster
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Allow Rejected Visitor</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     {{ html()->form()->route('allowVisitReq')->open() }}
                     @csrf
@@ -168,7 +167,7 @@ Roster
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button action="submit" class="btn btn-success">Allow Visitor</button>
                     </div>
                     {{ html()->form()->close() }}

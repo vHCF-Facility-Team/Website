@@ -394,7 +394,7 @@ class AdminDash extends Controller {
         if (Auth::user()->isAbleTo('roster') || Auth::user()->isAbleTo('train')) { // Update training certifications
             $positions = ['gnd','ogg_del','ogg_gnd','ogg_app','hnl_del','hnl_gnd','hnl_twr','hnl_app','twr_solo_fields'];
             foreach ($positions as $position) {
-                $user[$position] = ($request->input($position)) ? $request->input($position) : $user[$position];
+                $user[$position] = $request->input($position) ?? 0;
             }
             $positions = array_keys(User::$SoloFacilities);
             foreach ($positions as $solo_id => $position) {
@@ -421,7 +421,7 @@ class AdminDash extends Controller {
                     $solo_facility = User::$SoloFacilities[$position] . '_' . strtoupper($position);
                     (new Client())->request('POST', Config::get('vatusa.base').'/v2/solo'.'?apikey='.Config::get('vatusa.api_key').'&cid='.$id.'&position='.$solo_facility.'&expDate='.$expire, ['http_errors' => false]);
                 } else {
-                    $user[$position] = ($request->input($position)) ? $request->input($position) : $user[$position];
+                    $user[$position] = ($user[$position] != $user->getMagicNumber('SOLO_CERTIFICATION')) ? $request->input($position) : $user[$position];
                 }
             }
             $user->twr_solo_fields = $request->input('twr_solo_fields');
@@ -844,6 +844,11 @@ class AdminDash extends Controller {
     }
 
     public function fileSeparator(Request $request) {
+        $validator = $request->validate([
+            'title' => 'required',
+            'type' => 'required',
+        ]);
+
         $file = new File;
         $file->name = $request->input('title');
         $file->type = $request->input('type');
@@ -867,6 +872,11 @@ class AdminDash extends Controller {
     }
 
     public function saveFile(Request $request, $id) {
+        $validator = $request->validate([
+            'title' => 'required',
+            'type' => 'required',
+        ]);
+
         $permalink = $request->input('permalink');
         if (strlen($permalink) < 1) {
             $permalink = null;
@@ -924,15 +934,15 @@ class AdminDash extends Controller {
             $dispString .=     "<td>
 								<div class=\"btn-group\">";
             if (! $f->row_separator) {
-                $dispString .= "<a href=\"$f->path\" target=\"_blank\" class=\"btn btn-success simple-tooltip\" data-toggle=\"tooltip\" title=\"Download\"><i class=\"fas fa-download\"></i></a>";
+                $dispString .= "<a href=\"$f->path\" target=\"_blank\" class=\"btn btn-success simple-tooltip\" data-bs-toggle=\"tooltip\" title=\"Download\"><i class=\"fas fa-download\"></i></a>";
             }
-            $dispString .= "<a href=\"/dashboard/admin/files/edit/$f->id\" class=\"btn btn-warning simple-tooltip\" data-toggle=\"tooltip\" title=\"Edit\"><i class=\"fas fa-pencil-alt\"></i></a>
-                            <a href=\"/dashboard/admin/files/delete/$f->id\" onclick=\"return confirm(\'Are you sure you want to delete " . $f->name . "?\')\" class=\"btn btn-danger simple-tooltip\" data-toggle=\"tooltip\" title=\"Delete\"><i class=\"fas fa-times\"></i></a>";
+            $dispString .= "<a href=\"/dashboard/admin/files/edit/$f->id\" class=\"btn btn-warning simple-tooltip\" data-bs-toggle=\"tooltip\" title=\"Edit\"><i class=\"fas fa-pencil-alt\"></i></a>
+                            <a href=\"/dashboard/admin/files/delete/$f->id\" onclick=\"return confirm(\'Are you sure you want to delete " . $f->name . "?\')\" class=\"btn btn-danger simple-tooltip\" data-bs-toggle=\"tooltip\" title=\"Delete\"><i class=\"fas fa-times\"></i></a>";
             if ($f->disp_order > 0) { // Don't show the up button for the first item listed
-                $dispString .= "<a onclick=\"itemReorder($f->id,$f->disp_order,$f->type,\'up\');\" class=\"btn btn-info simple-tooltip\" data-toggle=\"tooltip\" title=\"Up\"><i class=\"fas fa-arrow-up\"></i></a>";
+                $dispString .= "<a onclick=\"itemReorder($f->id,$f->disp_order,$f->type,\'up\');\" class=\"btn btn-info simple-tooltip\" data-bs-toggle=\"tooltip\" title=\"Up\"><i class=\"fas fa-arrow-up\"></i></a>";
             }
             if (count($files) > $f->disp_order + 1) { // Don't show the down button for the last item listed
-                $dispString .= "<a onclick=\"itemReorder($f->id,$f->disp_order,$f->type,\'down\');\" class=\"btn btn-info simple-tooltip\" data-toggle=\"tooltip\" title=\"Down\"><i class=\"fas fa-arrow-down\"></i></a>";
+                $dispString .= "<a onclick=\"itemReorder($f->id,$f->disp_order,$f->type,\'down\');\" class=\"btn btn-info simple-tooltip\" data-bs-toggle=\"tooltip\" title=\"Down\"><i class=\"fas fa-arrow-down\"></i></a>";
             }
             $dispString .= "	</div>
 								</td>
@@ -1181,7 +1191,7 @@ class AdminDash extends Controller {
     public function sendEmail(Request $request) {
         $validator = $request->validate([
             'name' => 'required',
-            'reply_to' => 'required',
+            'reply_to' => 'required|email',
             'subject' => 'required',
             'message' => 'required'
         ]);

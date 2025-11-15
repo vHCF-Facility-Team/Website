@@ -5,18 +5,18 @@ View Airport ({{ $airport->ltr_4 }})
 @endsection
 
 @push('custom_header')
-<link rel="stylesheet" href="{{ mix('css/airports.css') }}" />
+@vite('resources/assets/sass/airports.scss')
 @endpush
 
 @section('content')
-@include('inc.header', ['title' => $airport->name . ' Airport (' . $airport->ltr_3 . ')', 'type' => 'external'])
+@include('inc.header', ['title' => $airport->name . ' (' . $airport->ltr_3 . ')', 'type' => 'external'])
 
 <div class="container">
     <div class="row">
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-header">
-                    <b>Airport Diagram</b> <div class="float-right"></div>
+                    <b>Airport Diagram</b> <div class="float-end"></div>
                 </div>
                 <div class="card-body">
                     @if($apd != '[]')
@@ -35,9 +35,9 @@ View Airport ({{ $airport->ltr_4 }})
                     <b>Current Weather/Forecast ({{ $airport->visual_conditions }} Conditions)</b>
                 </div>
                 <div class="card-body">
-                    METAR {{ $airport->metar }}
+                    {{ $airport->metar }}
                     <hr>
-                    TAF {!! $airport->taf !!}
+                    {!! $airport->taf !!}
                 </div>
             </div>
             <br>
@@ -67,9 +67,9 @@ View Airport ({{ $airport->ltr_4 }})
                                                         <tr>
                                                             <td>{{ $c->chart_name }}</td>
                                                             <td>
-                                                                <a href="{{ $c->pdf_url }}" class="btn btn-success btn-sm simple-tooltip" data-toggle="tooltip" title="View {{ $c->chart_name }}" target="_blank"><i class="fas fa-eye"></i></a>
+                                                                <a href="{{ $c->pdf_url }}" class="btn btn-success btn-sm simple-tooltip" data-bs-toggle="tooltip" title="View {{ $c->chart_name }}" target="_blank"><i class="fas fa-eye"></i></a>
                                                                 @if($c->did_change)
-                                                                    <a href="{{ $c->change_pdf_url }}" class="btn btn-warning btn-sm simple-tooltip" data-toggle="tooltip" title="View {{ $c->chart_name }} Changes" target="_blank"><i class="fas fa-file-pen"></i></a>
+                                                                    <a href="{{ $c->change_pdf_url }}" class="btn btn-warning btn-sm simple-tooltip" data-bs-toggle="tooltip" title="View {{ $c->chart_name }} Changes" target="_blank"><i class="fas fa-file-pen"></i></a>
                                                                 @endif
                                                             </td>
                                                         </tr>
@@ -80,9 +80,9 @@ View Airport ({{ $airport->ltr_4 }})
                                                         <tr>
                                                             <td>{{ $c->chart_name }}</td>
                                                             <td>
-                                                                <a href="{{ $c->pdf_url }}" class="btn btn-success btn-sm simple-tooltip" data-toggle="tooltip" title="View {{ $c->chart_name }}" target="_blank"><i class="fas fa-eye"></i></a>
+                                                                <a href="{{ $c->pdf_url }}" class="btn btn-success btn-sm simple-tooltip" data-bs-toggle="tooltip" title="View {{ $c->chart_name }}" target="_blank"><i class="fas fa-eye"></i></a>
                                                                 @if($c->did_change)
-                                                                    <a href="{{ $c->change_pdf_url }}" class="btn btn-warning btn-sm simple-tooltip" data-toggle="tooltip" title="View {{ $c->chart_name }} Changes" target="_blank"><i class="fas fa-file-pen"></i></a>
+                                                                    <a href="{{ $c->change_pdf_url }}" class="btn btn-warning btn-sm simple-tooltip" data-bs-toggle="tooltip" title="View {{ $c->chart_name }} Changes" target="_blank"><i class="fas fa-file-pen"></i></a>
                                                                 @endif
                                                             </td>
                                                         </tr>
@@ -114,9 +114,9 @@ View Airport ({{ $airport->ltr_4 }})
                                                     <tr>
                                                         <td>{{ $c->chart_name }}</td>
                                                         <td>
-                                                            <a href="{{ $c->pdf_url }}" class="btn btn-success btn-sm simple-tooltip" data-toggle="tooltip" title="View {{ $c->chart_name }}" target="_blank"><i class="fas fa-eye"></i></a>
+                                                            <a href="{{ $c->pdf_url }}" class="btn btn-success btn-sm simple-tooltip" data-bs-toggle="tooltip" title="View {{ $c->chart_name }}" target="_blank"><i class="fas fa-eye"></i></a>
                                                                 @if($c->did_change)
-                                                                    <a href="{{ $c->change_pdf_url }}" class="btn btn-warning btn-sm simple-tooltip" data-toggle="tooltip" title="View {{ $c->chart_name }} Changes" target="_blank"><i class="fas fa-file-pen"></i></a>
+                                                                    <a href="{{ $c->change_pdf_url }}" class="btn btn-warning btn-sm simple-tooltip" data-bs-toggle="tooltip" title="View {{ $c->chart_name }} Changes" target="_blank"><i class="fas fa-file-pen"></i></a>
                                                                 @endif
                                                         </td>
                                                     </tr>
@@ -147,9 +147,9 @@ View Airport ({{ $airport->ltr_4 }})
                                                     <tr>
                                                         <td>{{ $c->chart_name }}</td>
                                                         <td>
-                                                            <a href="{{ $c->pdf_url }}" class="btn btn-success btn-sm simple-tooltip" data-toggle="tooltip" title="View {{ $c->chart_name }}" target="_blank"><i class="fas fa-eye"></i></a>
+                                                            <a href="{{ $c->pdf_url }}" class="btn btn-success btn-sm simple-tooltip" data-bs-toggle="tooltip" title="View {{ $c->chart_name }}" target="_blank"><i class="fas fa-eye"></i></a>
                                                                 @if($c->did_change)
-                                                                    <a href="{{ $c->change_pdf_url }}" class="btn btn-warning btn-sm simple-tooltip" data-toggle="tooltip" title="View {{ $c->chart_name }} Changes" target="_blank"><i class="fas fa-file-pen"></i></a>
+                                                                    <a href="{{ $c->change_pdf_url }}" class="btn btn-warning btn-sm simple-tooltip" data-bs-toggle="tooltip" title="View {{ $c->chart_name }} Changes" target="_blank"><i class="fas fa-file-pen"></i></a>
                                                                 @endif
                                                         </td>
                                                     </tr>
@@ -180,9 +180,9 @@ View Airport ({{ $airport->ltr_4 }})
                                                     <tr>
                                                         <td>{{ $c->chart_name }}</td>
                                                         <td>
-                                                            <a href="{{ $c->pdf_url }}" class="btn btn-success btn-sm simple-tooltip" data-toggle="tooltip" title="View {{ $c->chart_name }}" target="_blank"><i class="fas fa-eye"></i></a>
+                                                            <a href="{{ $c->pdf_url }}" class="btn btn-success btn-sm simple-tooltip" data-bs-toggle="tooltip" title="View {{ $c->chart_name }}" target="_blank"><i class="fas fa-eye"></i></a>
                                                                 @if($c->did_change)
-                                                                    <a href="{{ $c->change_pdf_url }}" class="btn btn-warning btn-sm simple-tooltip" data-toggle="tooltip" title="View {{ $c->chart_name }} Changes" target="_blank"><i class="fas fa-file-pen"></i></a>
+                                                                    <a href="{{ $c->change_pdf_url }}" class="btn btn-warning btn-sm simple-tooltip" data-bs-toggle="tooltip" title="View {{ $c->chart_name }} Changes" target="_blank"><i class="fas fa-file-pen"></i></a>
                                                                 @endif
                                                         </td>
                                                     </tr>
@@ -275,5 +275,5 @@ View Airport ({{ $airport->ltr_4 }})
         </div>
     </div>
 </div>
-<script src="{{mix('js/airports.js')}}"></script>
+@vite('resources/assets/js/airports.js')
 @endsection
