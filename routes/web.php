@@ -29,7 +29,7 @@ Route::get('/pilots/scenery/view/{id}', 'FrontController@showScenery');
 Route::post('/pilots/scenery/search', 'FrontController@searchScenery');
 Route::get('/pilots/request-staffing', 'FrontController@showStaffRequest');
 Route::post('/pilots/request-staffing', 'FrontController@staffRequest')->name('staffRequest');
-Route::get('/pilots/guide/hnl', 'FrontController@pilotGuideAtl');
+Route::get('/pilots/guide/hnl', 'FrontController@pilotGuideHnl');
 Route::get('/feedback/new', 'FrontController@newFeedback');
 Route::get('/feedback/new/{slug}', 'FrontController@newFeedback');
 Route::post('/feedback/new', 'FrontController@saveNewFeedback')->name('saveNewFeedback');
